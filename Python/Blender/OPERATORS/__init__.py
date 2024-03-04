@@ -1,0 +1,2 @@
+from .AddPlatform import PLATFORM_OT_AddPlatform
+from .DeletePlatform import PLATFORM_OT_DeletePlatform
