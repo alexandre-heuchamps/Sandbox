@@ -2,6 +2,7 @@ import bpy
 import sys
 import subprocess
 import os
+from . import *
 
 try:
     import pandas as pd
