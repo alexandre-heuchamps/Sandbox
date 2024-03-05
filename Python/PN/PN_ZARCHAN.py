@@ -9,6 +9,7 @@ if __name__ == "__main__":
     S = 0.0                     # time ("second version")
     n = 0                       # time iteration counter
     NDT = 300                   # maximum number of time iterations
+    H = 1e-3                    # timestep
 
     # Target related parameters
     VT = 50.0                   # target speed
@@ -52,3 +53,20 @@ if __name__ == "__main__":
     ArrayRM2 = []
     ArrayXNCG = []
     ArrayRTM = []
+
+    # Start simulation
+    while((VC >= 0) and (n < NDT)):
+        if RTM < 1000.0:
+            H = 0.0002
+        else:
+            H = 0.01
+
+        BETAOLD = BETA
+        RT1OLD = RT1
+        RT2OLD = RT2
+        RM1OLD = RM1
+        RM2OLD = RM2
+        VM1OLD = VM1
+        VM2OLD = VM2
+        STEP = 1
+        FLAG = 0
