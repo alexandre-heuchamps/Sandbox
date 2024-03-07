@@ -15,8 +15,8 @@ class Body():
             Mass of the created object
         x0: <class 'numpy.ndarray'> (default: [0.0, 0.0, 0.0])
             Initial position of the created object """
-        self._m = m
-        self._x0 = x0
+        self._m: float = m
+        self._x0: np.ndarray = x0
 
     # ==========================================================================
     @property
@@ -25,7 +25,7 @@ class Body():
 
     @m.setter
     def m(self, m: float = 1.0) -> None:
-        self._m = m
+        self._m: float = m
     # ==========================================================================
 
 
