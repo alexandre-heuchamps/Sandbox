@@ -68,8 +68,3 @@ class World():
 
 if __name__ == "__main__":
     world = World()
-    print(world.ndim, world.g)
-    world.ndim = 6
-    print(world.ndim, world.g)
-    world.g = np.array([2.3, 4.5])
-    print(world.g)
