@@ -1,0 +1,5 @@
+https://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex
+https://tex.stackexchange.com/questions/69483/create-a-local-texmf-tree-in-miktex
+https://tex.stackexchange.com/questions/67712/difference-between-administrative-and-user-mode-of-miktex
+https://tex.stackexchange.com/questions/69483/create-a-local-texmf-tree-in-miktex
+https://tex.stackexchange.com/questions/8791/speeding-up-latex-compilation
