@@ -34,9 +34,18 @@ class World():
 
     @ndim.setter
     def ndim(self, ndim: int = 3) -> None:
-        self._ndim: int = ndim
-        self._g: np.array = np.zeros( self.ndim )
-        self._g[-1] = -9.81
+        if ((ndim != 2) or (ndim != 3)):
+            ndim_default = 3
+            print(f"World only of dimension 2 or 3.")
+            print(f"Entered {ndim}.")
+            print(f"Changing to {ndim_default}")
+            self._ndim: int = ndim_default
+            self._g: np.array = np.zeros( ndim_default )
+            self._g[-1] = -9.81
+        else:
+            self._ndim: int = ndim
+            self._g: np.array = np.zeros( self.ndim )
+            self._g[-1] = -9.81
     # ==========================================================================
 
     # ==========================================================================
@@ -62,3 +71,5 @@ if __name__ == "__main__":
     print(world.ndim, world.g)
     world.ndim = 6
     print(world.ndim, world.g)
+    world.g = np.array([2.3, 4.5])
+    print(world.g)
