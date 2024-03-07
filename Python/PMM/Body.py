@@ -1,7 +1,7 @@
 import numpy as np
 
 class Body():
-    """ Generic class to represent a 'body'. Can be a projectile or a target """
+    """ Generic class to represent a 'Body'. Can be a projectile or a target """
 
     def __init__(self,
                     m: float = 1.0,
