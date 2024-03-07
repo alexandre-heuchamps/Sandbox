@@ -35,6 +35,8 @@ class World():
     @ndim.setter
     def ndim(self, ndim: int = 3) -> None:
         self._ndim: int = ndim
+        self._g: np.array = np.zeros( self.ndim )
+        self._g[-1] = -9.81
     # ==========================================================================
 
     # ==========================================================================
@@ -57,3 +59,6 @@ class World():
 
 if __name__ == "__main__":
     world = World()
+    print(world.ndim, world.g)
+    world.ndim = 6
+    print(world.ndim, world.g)
