@@ -17,7 +17,7 @@ class Body():
         x0: <class 'numpy.array'> (default: [0.0, 0.0, 0.0])
             Initial position of the created object """
         self._m: float = m
-        self._x0: np.ndarray = x0
+        self._x0: np.array = x0
 
     # ==========================================================================
     @property
