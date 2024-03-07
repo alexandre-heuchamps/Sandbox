@@ -37,6 +37,19 @@ class Simulator():
         self._ndt: int = ndt
     # ==========================================================================
 
+    # ==========================================================================
+    def run(self, target, platform) -> None:
+        """ Function performing the ballistic propagation
+
+        Parameters
+        ----------
+        target: <class 'Target'>
+            Target to be neutralised
+        platform: <class 'Platform'>
+            Platform neutralising the target """
+        pass
+    # ==========================================================================
+
 
 
 if __name__ == "__main__":
