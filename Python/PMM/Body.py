@@ -7,7 +7,8 @@ class Body():
                     m: float = 1.0,
                     x0: np.array = np.array([0.0, 0.0, 0.0]),
                  ) -> None:
-        """ Initiate an object of type 'Body' with a given mass an initial position
+        """ Initiate an object of type 'Body' with a given mass an initial
+        position
 
         Parameters
         ----------
@@ -42,6 +43,3 @@ class Body():
 
 if __name__ == "__main__":
     b = Body()
-    print(b.x0, type(b.x0))
-    b.x0 = np.array([1.0, 2.3, 4.6])
-    print(b.x0, type(b.x0))
