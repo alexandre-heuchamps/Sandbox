@@ -1,5 +1,3 @@
-import numpy as np
-
 class Simulator():
     """ Class to represent a 'Simulator' (for ballistic propagation) """
 
