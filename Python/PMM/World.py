@@ -124,7 +124,6 @@ class World():
 
     @targets.setter
     def targets(self, target: Body = Body()) -> None:
-        print(target)
         self._targets.append(target)
     # ==========================================================================
 
