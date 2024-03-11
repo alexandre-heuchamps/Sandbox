@@ -18,6 +18,8 @@ class Body():
             Initial position of the created object """
         self._m: float = m
         self._x0: np.array = x0
+        self._x: list = [x0]
+        self._v: list = []
 
     # ==========================================================================
     @property
@@ -39,6 +41,28 @@ class Body():
     @x0.setter
     def x0(self, x0: np.array = np.array([0.0, 0.0, 0.0])) -> None:
         self._x0: np.array = x0
+    # ==========================================================================
+
+    # ==========================================================================
+    @property
+    def x(self) -> list:
+        """ Get or set (append) the set of successive body positions """
+        return self._x
+
+    @x.setter
+    def x(self, x: np.array = np.array([0.0, 0.0, 0.0])) -> None:
+        self._x.append(x)
+    # ==========================================================================
+
+    # ==========================================================================
+    @property
+    def v(self) -> list:
+        """ Get or set (append) the set of successive body velocities """
+        return self._v
+
+    @v.setter
+    def v(self, v: np.array = np.array([0.0, 0.0, 0.0])) -> None:
+        self._v.append(v)
     # ==========================================================================
 
 
