@@ -1,9 +1,12 @@
+from World import World
+
 class Simulator():
     """ Class to represent a 'Simulator' (for ballistic propagation) """
 
     def __init__(self,
                     dt: float = 1e-3,
                     ndt: int = int(1e3),
+                    world: World = World(),
                  ) -> None:
         """ Initiate an object of type 'Simulator' with given timestep
         and number of timesteps
@@ -16,6 +19,7 @@ class Simulator():
             Number of timesteps used in the simulation """
         self._dt: float = dt
         self._ndt: int = ndt
+        self._world: World = world
 
     # ==========================================================================
     @property
@@ -114,7 +118,20 @@ class Simulator():
         return (v / 3.6)
     # ==========================================================================
 
+    # ==========================================================================
+    @property
+    def world(self) -> World:
+        """ Get or set the world in which the simulation takes place """
+        return self._world
+
+    @world.setter
+    def world(self, world: World = World()) -> None:
+        self._world: World = world
+    # ==========================================================================
+
 
 
 if __name__ == "__main__":
     sim = Simulator()
+    v_mps = 330.0
+    print(f"{v_mps} m/s == {sim.speed_to_kph(v_mps)} km/h == {sim.speed_to_Ma(v_mps)} Ma")
