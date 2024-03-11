@@ -20,6 +20,7 @@ class Simulator():
     # ==========================================================================
     @property
     def dt(self) -> float:
+        """ Get or set the current timestep """
         return self._dt
 
     @dt.setter
@@ -30,6 +31,7 @@ class Simulator():
     # ==========================================================================
     @property
     def ndt(self) -> int:
+        """ Get or set the number of timestep """
         return self._ndt
 
     @ndt.setter

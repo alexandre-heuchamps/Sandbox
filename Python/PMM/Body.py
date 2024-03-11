@@ -22,6 +22,7 @@ class Body():
     # ==========================================================================
     @property
     def m(self) -> float:
+        """ Get or set the mass of the body """
         return self._m
 
     @m.setter
@@ -32,6 +33,7 @@ class Body():
     # ==========================================================================
     @property
     def x0(self) -> np.array:
+        """ Get or set the initial position of the body """
         return self._x0
 
     @x0.setter

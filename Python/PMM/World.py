@@ -105,6 +105,7 @@ class World():
     # ==========================================================================
     @property
     def targets(self) -> list:
+        """ Get or set the list of targets """
         return self._targets
 
     @targets.setter
@@ -116,6 +117,7 @@ class World():
     # ==========================================================================
     @property
     def platforms(self) -> list:
+        """ Get or set the list of platforms """
         return self._platforms
 
     @platforms.setter
