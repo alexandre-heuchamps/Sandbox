@@ -1,4 +1,7 @@
+import Utils
 from World import World
+from Projectile import Projectile
+from Target import Target
 
 class Simulator():
     """ Class to represent a 'Simulator' (for ballistic propagation) """
@@ -44,19 +47,6 @@ class Simulator():
     # ==========================================================================
 
     # ==========================================================================
-    def run(self, target, platform) -> None:
-        """ Function performing the ballistic propagation
-
-        Parameters
-        ----------
-        target: <class 'Target'>
-            Target to be neutralised
-        platform: <class 'Platform'>
-            Platform neutralising the target """
-        pass
-    # ==========================================================================
-
-    # ==========================================================================
     @property
     def world(self) -> World:
         """ Get or set the world in which the simulation takes place """
@@ -65,6 +55,19 @@ class Simulator():
     @world.setter
     def world(self, world: World = World()) -> None:
         self._world: World = world
+    # ==========================================================================
+
+    # ==========================================================================
+    def run(self, target: Target, projectile: Projectile) -> None:
+        """ Function performing the ballistic propagation
+
+        Parameters
+        ----------
+        target: <class 'Target'>
+            Target to be neutralised
+        projectile: <class 'Projectile'>
+            Projectile neutralising the target """
+        pass
     # ==========================================================================
 
 
