@@ -7,6 +7,7 @@ class World():
     def __init__(self,
                     ndim: int = 3,
                     g: np.array = np.array([0.0, 0.0, -9.81]),
+                    vsound: float = 330.0,
                     targets: list = [],
                     platforms: list = [],
                  ) -> None:
@@ -19,6 +20,8 @@ class World():
             Dimension of the space in which the simulation takes place
         g: <class 'numpy.array'> (default: [0.0, 0.0, -9.81])
             Gravity of the space in which the simulation takes place
+        vsound: <class 'float'> (default: 330.0 [m/s])
+            Speed of sound of the world
         targets: <class 'list'> (default: [])
             List of targets contained in the world
         platforms: <class 'list'> (default: [])
@@ -104,6 +107,17 @@ class World():
 
     # ==========================================================================
     @property
+    def vsound(self) -> float:
+        """ Get or set the speed of sound """
+        return self._vsound
+
+    @vsound.setter
+    def vsound(self, vsound: float = 330.0) -> None:
+        self._vsound = vsound
+    # ==========================================================================
+
+    # ==========================================================================
+    @property
     def targets(self) -> list:
         """ Get or set the list of targets """
         return self._targets
@@ -129,12 +143,3 @@ class World():
 
 if __name__ == "__main__":
     w = World()
-    print(f"Out1: {w.ndim}, {w.g}")
-    w.ndim = 5
-    print(f"Out2: {w.ndim}, {w.g}")
-    w.g = [2.3, 6.4]
-    print(f"Out3: {w.ndim}, {w.g}")
-    w.g = [2.3, 6.4, 5.6]
-    print(f"Out4: {w.ndim}, {w.g}")
-    help(w)
-    print(w.targets)
