@@ -1,3 +1,5 @@
+import numpy as np
+
 def speed_to_Ma(v: float, vsound: float = 330.0) -> float:
     """ Converts a speed expressed in m/s to a speed expressed in Ma
 
@@ -57,3 +59,19 @@ def kph_to_speed(v: float) -> float:
     _: <class 'float'>
         Equivalent of input speed, in terms of m/s """
     return (v / 3.6)
+
+def gravity_effect(m: float, g: np.array = np.array([0.0, 0.0, -9.81])) -> np.array:
+    """ Returns the gravity force
+
+    Parameters
+    ----------
+    m: <class 'float'>
+        Mass of the object on which the gravity force is applied
+    g: <class 'numpy.array'> (default: np.array([0.0, 0.0, -9.81]))
+        Gravity vector
+
+    Returns
+    -------
+    _: <class 'numpy.array'>
+        Gravity force, computed as m * g """
+    return m * g
