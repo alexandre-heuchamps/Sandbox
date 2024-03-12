@@ -1,3 +1,6 @@
+import numpy as np
+from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 import Utils
 from World import World
 from Projectile import Projectile
@@ -68,6 +71,31 @@ class Simulator():
         projectile: <class 'Projectile'>
             Projectile neutralising the target """
         pass
+    # ==========================================================================
+
+    # ==========================================================================
+    def plot_vals(self, *v: np.array) -> None:
+        """ Function plotting vectors against each other
+
+        Parameters
+        ----------
+        *v: <class 'numpy.array'>
+            Vectors to consider
+
+        Returns
+        -------
+        _: """
+        if len(v) == 2:
+            plt.figure()
+            plt.plot(*v)
+            plt.show()
+        elif len(v) == 3:
+            fig = plt.figure()
+            ax = fig.add_subplot(111, projection='3d')
+            ax.plot(*v)
+            plt.show()
+        else:
+            print("Invalid number of arguments. Provide only 2 or 3 arguments.")
     # ==========================================================================
 
 
