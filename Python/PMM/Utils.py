@@ -60,6 +60,20 @@ def kph_to_speed(v: float) -> float:
         Equivalent of input speed, in terms of m/s """
     return (v / 3.6)
 
+def vecnorm(v: np.array) -> float:
+    """ Returns the norm of the input vector
+
+    Parameters
+    ----------
+    v: <class 'numpy.array'>
+        Vector for which the norm is returned
+
+    Returns
+    -------
+    _: <class 'float'>
+        Norm of the input vector, computed through numpy.linalg.norm(v) """
+    return np.linalg.norm(v)
+
 def gravity_effect(m: float, g: np.array = np.array([0.0, 0.0, -9.81])) -> np.array:
     """ Returns the gravity force
 
