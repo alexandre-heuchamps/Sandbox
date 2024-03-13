@@ -77,7 +77,7 @@ def get_coordinates(root: ET.Element,
                         is_big: bool = True,
                         kw: str = "coordinates",
                         *strings: str,
-                    ) -> list | list | list:
+                    ) -> tuple:
     """ Returns the path coordinates stored in the file corresponding to the
     input root. Depending on the parameter 'is_big', one method or another
     is used: is True, the structure of the file is assumed to be known and
@@ -111,9 +111,7 @@ def get_coordinates(root: ET.Element,
 
 
 
-def get_coordinates_assumed(root: ET.Element,
-                                path: str
-                            ) -> list | list | list:
+def get_coordinates_assumed(root: ET.Element, path: str) -> tuple:
     """ Returns the path coordinates stored in the file corresponding to the
     input root, using the string contained in 'path' input
 
@@ -146,9 +144,7 @@ def get_coordinates_assumed(root: ET.Element,
 
 
 
-def get_coordinates_iter(root: ET.Element,
-                            kw: str = "coordinates"
-                        ) -> list | list | list:
+def get_coordinates_iter(root: ET.Element, kw: str = "coordinates") -> tuple:
     """ Returns the path coordinates stored in the file corresponding to the
     input root by iterating ove all tags, up to the first appearance of the
     'kw' input
@@ -180,6 +176,70 @@ def get_coordinates_iter(root: ET.Element,
 
 
 
+def get_bounding_box(x: list, y: list, z:list) -> None:
+    """ Gets the bounding point coordinates for the loaded .kml file
+
+    Parameters
+    ----------
+    x: <class 'list'>
+        List of x coordinates
+    y: <class 'list'>
+        List of y coordinates
+    z: <class 'list'>
+        List of z coordinates
+
+    Returns
+    -------
+    xmin: <class 'float'>
+        Minimum x coordinate
+    ymin: <class 'float'>
+        Minimum y coordinate
+    zmin: <class 'float'>
+        Minimum z coordinate
+    xmax: <class 'float'>
+        Maximum x coordinate
+    ymax: <class 'float'>
+        Maximum y coordinate
+    zmax: <class 'float'>
+        Maximum z coordinate """
+    xmin: float = np.min(x)
+    ymin: float = np.min(y)
+    zmin: float = np.min(z)
+    xmax: float = np.max(x)
+    ymax: float = np.max(y)
+    zmax: float = np.max(z)
+    return xmin, ymin, zmin, xmax, ymax, zmax
+
+
+
+def get_bounding_volume(xmin: float, ymin: float, zmin:float,
+                            xmax: float, ymax: float, zmax:float
+                        ) -> float:
+    """ Computes the volume of the bounding box around the loaded coordinates
+
+    Parameters
+    ----------
+    xmin: <class 'float'>
+        Minimum x coordinate
+    ymin: <class 'float'>
+        Minimum y coordinate
+    zmin: <class 'float'>
+        Minimum z coordinate
+    xmax: <class 'float'>
+        Maximum x coordinate
+    ymax: <class 'float'>
+        Maximum y coordinate
+    zmax: <class 'float'>
+        Maximum z coordinate
+
+    Returns
+    -------
+    _: <class 'float'>
+        Volume of the bounding box """
+    return ((xmax - xmin) * (ymax - ymin) * (zmax - zmin))
+
+
+
 
 
 if __name__ == "__main__":
@@ -198,8 +258,3 @@ if __name__ == "__main__":
                                 False,
                                 "coordinates"
                             )
-
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-    ax.scatter(x, y, z)
-    plt.show()
