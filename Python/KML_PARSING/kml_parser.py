@@ -203,4 +203,3 @@ if __name__ == "__main__":
     ax = fig.add_subplot(111, projection='3d')
     ax.scatter(x, y, z)
     plt.show()
-    # ".//kml:Placemark/kml:Polygon/kml:outerBoundaryIs/kml:LinearRing/kml:coordinates"
