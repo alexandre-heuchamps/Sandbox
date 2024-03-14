@@ -1,14 +1,17 @@
 import numpy as np
+from Body import Body
+import Utils as u
 
-class Target():
+class Target(Body):
     """ Class representing a 'Target' """
 
     def __init__(self,
                     m: float = 1.0,
                     x0: np.array = np.array([0.0, 0.0, 0.0]),
                  ) -> None:
-        """ Initiate an object of type 'Target' with a given mass, flight path,
-        and speed
+        """ Initiate an object of type 'Target' with a given mass and initial
+        position. Alternatively, an object of type 'Target' can be constructed
+        by specifying the path to a .kml file containing coordinates
 
         Parameters
         ----------
@@ -20,6 +23,19 @@ class Target():
         self._x0: np.array = x0
         self._x: list = [x0]
         self._v: list = []
+
+    @classmethod
+    def pos_from_file(cls, path_kml_file: str = "./Drone_Flight_Path.kml"):
+        t = u.get_tree(file = path_kml_file)
+        root = u.get_root(tree = t)
+        x, y, z = u.get_coordinates(root = root, is_big = False, kw = "coordinates")
+        x0 = np.array([x[0], y[0], z[0]])
+        target = cls(x0 = x0)
+    
+        for xx, yy, zz in zip(x[1:], y[1:], z[1:]):
+            target._x.append(np.array([xx, yy, zz]))
+
+        return target
 
     # ==========================================================================
     @property
@@ -41,6 +57,7 @@ class Target():
     @x0.setter
     def x0(self, x0: np.array = np.array([0.0, 0.0, 0.0])) -> None:
         self._x0: np.array = x0
+        self._x[0] = x0
     # ==========================================================================
 
     # ==========================================================================
@@ -69,3 +86,4 @@ class Target():
 
 if __name__ == "__main__":
     t = Target()
+    t2 = Target.pos_from_file(path_kml_file = "./Drone_Flight_Path.kml")
