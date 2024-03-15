@@ -77,6 +77,33 @@ class Simulator():
     # ==========================================================================
 
     # ==========================================================================
+    def get_point_to_hit(self, pt: np.array = [0.0, 0.0, 0.0]) -> np.array:
+        for coords in self.world.targets[0].x:
+            if np.array_equal(pt, coords):
+                return pt
+
+        # Alternative version:
+        # if the arrays are 1D and have the same shape, the efficiency could be
+        # improved by converting the list of arrays and the target array into
+        # sets of tuples, then checking for membership.
+        # This method works because sets in Python are implemented as hash tables
+        # and membership checks in a set are generally faster than in a list.
+        # However, this only works for 1D arrays of the same shape, and assumes
+        # the order of elements matters (i.e., [0.0, 1.0] is not the same as
+        # [1.0, 0.0]). If the arrays are not 1D or have different shapes, 
+        # stick with the previous method.
+        # The conversion to tuples and the creation of the set have a
+        # computational cost, so this method will be more efficient only if
+        # membership check happens many times.
+        # For single check, previous method is better
+        # coords = set(tuple(arr) for arr in self.world.targets[0].x)
+        # if tuple(pt) in coords:
+        #     return pt
+        # else:
+        #     pass
+    # ==========================================================================
+
+    # ==========================================================================
     def run(self, target: Target, projectile: Projectile) -> None:
         """ Function performing the ballistic propagation
 
