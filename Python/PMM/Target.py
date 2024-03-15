@@ -8,10 +8,11 @@ class Target(Body):
     def __init__(self,
                     m: float = 1.0,
                     x0: np.array = np.array([0.0, 0.0, 0.0]),
+                    dims: np.array = np.array([1.0, 1.0, 1.0]),
                  ) -> None:
-        """ Initiate an object of type 'Target' with a given mass and initial
-        position. Alternatively, an object of type 'Target' can be constructed
-        by specifying the path to a .kml file containing coordinates
+        """ Initiate an object of type 'Target' with a given mass, initial
+        position, and dimensions. Alternatively, an object of type 'Target' can
+        be constructed by specifying the path to a .kml file containing coordinates
 
         Parameters
         ----------
@@ -21,6 +22,7 @@ class Target(Body):
             Initial position of the created object """
         self._m: float = m
         self._x0: np.array = x0
+        self._dims: np.array = dims
         self._x: list = [x0]
         self._v: list = []
 
@@ -58,6 +60,17 @@ class Target(Body):
     def x0(self, x0: np.array = np.array([0.0, 0.0, 0.0])) -> None:
         self._x0: np.array = x0
         self._x[0] = x0
+    # ==========================================================================
+
+    # ==========================================================================
+    @property
+    def dims(self) -> np.array:
+        """ Get or set the dimensions of the target """
+        return self._dims
+
+    @dims.setter
+    def dims(self, dims: np.array = np.array([1.0, 1.0, 1.0])) -> None:
+        self._dims = dims
     # ==========================================================================
 
     # ==========================================================================
