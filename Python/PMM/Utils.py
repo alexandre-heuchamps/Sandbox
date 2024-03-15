@@ -364,3 +364,60 @@ def get_bounding_volume(xmin: float, ymin: float, zmin:float,
         Volume of the bounding box """
     return ((xmax - xmin) * (ymax - ymin) * (zmax - zmin))
 # ==============================================================================
+
+# ==============================================================================
+def sec(x: float) -> float:
+    return (1 / np.cos(x))
+# ==============================================================================
+
+# ==============================================================================
+# https://github.com/openstreetmap/svn-archive/blob/main/applications/routing/pyroute/tilenames.py
+def latlon2relativeXY(lon: float, lat: float) -> tuple:
+    x = (lon + 180) / 360
+    y = (1 - np.log(np.tan(np.deg2rad(lat)) + sec(np.deg2rad(lat))) / np.pi) / 2
+    return x, y
+# ==============================================================================
+
+# ==============================================================================
+# To convert longitude and latitude to X and Y, a map projection is needed.
+# The most common one is the Mercator projection
+def lonlat_to_xy(lon: float, lat: float):
+    R = 6378137  # Earth radius in meters
+    # R = 1.0  # Earth radius in meters
+    x = R * np.deg2rad(lon)
+    y = R * np.log(np.tan(np.pi / 4 + np.deg2rad(lat) / 2))
+    return x, y
+# ==============================================================================
+
+def fromGeographic(self, lat, lon):
+    radius = 6378137.
+    lat = np.deg2rad(lat)
+    lon = np.deg2rad(lon)
+    B = np.sin(lon) * np.cos(lat)
+    x = 0.5 * radius * np.log((1.+B)/(1.-B))
+    y = radius * ( np.arctan(np.tan(lat)/np.cos(lon)) - lat )
+    return (x, y, 0.)
+
+
+
+import math
+
+# Constants for the WGS84 ellipsoid
+a = 6378137.0        # semi-major axis
+f = 1 / 298.257223563 # flattening
+b = a * (1 - f)      # semi-minor axis
+
+def latlon_to_xyz(lat, lon, alt):
+    # Convert latitude and longitude to radians
+    lat_rad = math.radians(lat)
+    lon_rad = math.radians(lon)
+
+    # Calculate prime vertical radius of curvature
+    N = a / math.sqrt(1 - (2*f - f*f) * math.sin(lat_rad)**2)
+
+    # Calculate Cartesian coordinates
+    x = (N + alt) * math.cos(lat_rad) * math.cos(lon_rad)
+    y = (N + alt) * math.cos(lat_rad) * math.sin(lon_rad)
+    z = ((b**2 / a**2) * N + alt) * math.sin(lat_rad)
+
+    return x, y, z
