@@ -1,5 +1,6 @@
 import numpy as np
 from Body import Body
+from Target import Target
 
 class World():
     """ Class to represent the 'World' containing everything """
@@ -123,7 +124,7 @@ class World():
         return self._targets
 
     @targets.setter
-    def targets(self, target: Body = Body()) -> None:
+    def targets(self, target: Target = Target()) -> None:
         self._targets.append(target)
     # ==========================================================================
 
