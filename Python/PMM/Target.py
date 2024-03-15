@@ -95,6 +95,19 @@ class Target(Body):
         self._v.append(v)
     # ==========================================================================
 
+    # ==========================================================================
+    def get_ellipsoid_axes(self) -> np.array:
+        """ Function returning the semi-axes of the ellipsoid that fits the
+        target based on its dimensions. The general equation of an ellispoid
+        centred at the origin with its axes aligned with the x, y, and z axes,
+        with semi-axes of length a, b, and c, is given by
+
+            (x / a)^2 + (y / b)^2 + (z / c)^2 = 1 """
+
+        Lx, Ly, Lz = self.dims()[0], self.dims()[1], self.dims()[2]
+        return np.array([Lx, Ly, Lz])
+    # ==========================================================================
+
 
 
 if __name__ == "__main__":
