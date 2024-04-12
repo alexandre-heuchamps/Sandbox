@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+
+
+
+[project]
+name = "example_package_HEUCHAMPS"
+version = "2024.0.1"
+authors = [
+  { name="Alexandre HEUCHAMPS", email="alexandre.heuchamps@dymasec.be" },
+]
+maintainers = [
+  { name="Alexandre HEUCHAMPS", email="alexandre.heuchamps@dymasec.be" },
+]
+description = "A small example package as exposed in the Python Packaging User Guide"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+
+
+
+
+[project.scripts]
+spam-cli = "packaging_tuto:main_cli"
+
+
+
+
+
+[project.gui-scripts]
+spam-gui = "packaging_tuto:main_gui"
