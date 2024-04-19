@@ -1,2 +1,5 @@
+import pathlib
+
+
 if __name__ == "__main__":
-    print("Hello World!")
+    print(f"Hello World! from {pathlib.Path(__file__).absolute()}")
