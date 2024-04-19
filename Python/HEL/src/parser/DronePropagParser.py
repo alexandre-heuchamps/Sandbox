@@ -1,4 +1,4 @@
-from .FilePropagParser import FilePropagParser
+from FilePropagParser import FilePropagParser
 
 
 
