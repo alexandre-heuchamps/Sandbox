@@ -75,3 +75,5 @@ class CLParser:
 
 if __name__ == "__main__":
     cl_parser = CLParser()
+    print(f"Requested {cl_parser.get_nHEL()} HEL(s) from the CL")
+    print(f"Requested {cl_parser.get_nDrone()} drone(s) from the CL")
