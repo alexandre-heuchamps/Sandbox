@@ -1,5 +1,12 @@
 import sys
 from typing import Tuple
+from FileParser import FileParser
+from FileParamParser import FileParamParser
+from FilePropagParser import FilePropagParser
+from HELParamParser import HELParamParser
+from HELPropagParser import HELPropagParser
+from DroneParamParser import DroneParamParser
+from DronePropagParser import DronePropagParser
 
 
 
@@ -58,6 +65,16 @@ class CLParser:
     # ==========================================================================
 
     # ==========================================================================
+    def get_opt_argv(self) -> list[str]:
+        """ Function returning all the optional inputs """
+        pattern = FileParser.get_req_kw()
+        idx = [i for i, v in enumerate(self._argv) if pattern in v]
+        s = [self._argv[i] for i in idx]
+        f = [self._argv[i + 1] for i in idx]
+        return [item for tup in list(zip(s, f)) for item in tup]
+    # ==========================================================================
+
+    # ==========================================================================
     def get_nHEL(self) -> int:
         """ Extract the number of requested HEL(s) from the command line """
         idx_nHEL = self._argv.index("-nHEL")
@@ -71,9 +88,47 @@ class CLParser:
         return int(self._argv[idx_nDrone + 1])
     # ==========================================================================
 
+    # ==========================================================================
+    def get_param_files(self) -> list[str]:
+        """ Function returning all the optional param files """
+        pattern = FileParser.get_req_kw() + FileParamParser.get_req_kw()
+        opt_argv = self.get_opt_argv()
+        idx = [i for i, v in enumerate(opt_argv) if pattern in v]
+        return [opt_argv[i + 1] for i in idx]
+    # ==========================================================================
+
+    # ==========================================================================
+    def get_propag_files(self) -> list[str]:
+        """ Function returning all the optional propag files """
+        pattern = FileParser.get_req_kw() + FilePropagParser.get_req_kw()
+        opt_argv = self.get_opt_argv()
+        idx = [i for i, v in enumerate(opt_argv) if pattern in v]
+        return [opt_argv[i + 1] for i in idx]
+    # ==========================================================================
+
+    # ==========================================================================
+    def get_HEL_files(self) -> list[str]:
+        """ Function returning all the optional HEL files """
+        opt_argv = self.get_opt_argv()
+        idx = [i for i, v in enumerate(opt_argv) if "HEL" in v]
+        return [opt_argv[i + 1] for i in idx]
+    # ==========================================================================
+
+    # ==========================================================================
+    def get_drone_files(self) -> list[str]:
+        """ Function returning all the optional drone files """
+        opt_argv = self.get_opt_argv()
+        idx = [i for i, v in enumerate(opt_argv) if "drone" in v]
+        return [opt_argv[i + 1] for i in idx]
+    # ==========================================================================
+
 
 
 if __name__ == "__main__":
     cl_parser = CLParser()
-    print(f"Requested {cl_parser.get_nHEL()} HEL(s) from the CL")
-    print(f"Requested {cl_parser.get_nDrone()} drone(s) from the CL")
+    argv = cl_parser.argv
+    print(f"Optional arguments {cl_parser.get_opt_argv()}")
+    print(f"Optional parameter file(s) {cl_parser.get_param_files()}")
+    print(f"Optional propagation file(s) {cl_parser.get_propag_files()}")
+    print(f"Optional HEL file(s) {cl_parser.get_HEL_files()}")
+    print(f"Optional drone file(s) {cl_parser.get_drone_files()}")
