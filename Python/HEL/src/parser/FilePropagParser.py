@@ -1,5 +1,5 @@
 from typing import Tuple
-from .FileParser import FileParser
+from FileParser import FileParser
 
 
 
