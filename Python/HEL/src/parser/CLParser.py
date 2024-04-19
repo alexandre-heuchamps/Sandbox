@@ -65,16 +65,6 @@ class CLParser:
     # ==========================================================================
 
     # ==========================================================================
-    def get_opt_argv(self) -> list[str]:
-        """ Function returning all the optional inputs """
-        pattern = FileParser.get_req_kw()
-        idx = [i for i, v in enumerate(self._argv) if pattern in v]
-        s = [self._argv[i] for i in idx]
-        f = [self._argv[i + 1] for i in idx]
-        return [item for tup in list(zip(s, f)) for item in tup]
-    # ==========================================================================
-
-    # ==========================================================================
     def get_nHEL(self) -> int:
         """ Extract the number of requested HEL(s) from the command line """
         idx_nHEL = self._argv.index("-nHEL")
@@ -86,6 +76,25 @@ class CLParser:
         """ Extract the number of requested drone(s) from the command line """
         idx_nDrone = self._argv.index("-nDrone")
         return int(self._argv[idx_nDrone + 1])
+    # ==========================================================================
+
+    # ==========================================================================
+    def get_opt_argv(self) -> list[str]:
+        """ Function returning all the optional inputs """
+        pattern = FileParser.get_req_kw()
+        idx = [i for i, v in enumerate(self._argv) if pattern in v]
+        s = [self._argv[i] for i in idx]
+        f = [self._argv[i + 1] for i in idx]
+        return [item for tup in list(zip(s, f)) for item in tup]
+    # ==========================================================================
+
+    # ==========================================================================
+    def get_opt_files(self) -> list[str]:
+        """ Function returning all the optional files """
+        pattern = FileParser.get_req_kw()
+        opt_argv = self.get_opt_argv()
+        idx = [i for i, s in enumerate(opt_argv) if pattern in s]
+        return [opt_argv[i + 1] for i in idx]
     # ==========================================================================
 
     # ==========================================================================
@@ -128,6 +137,7 @@ if __name__ == "__main__":
     cl_parser = CLParser()
     argv = cl_parser.argv
     print(f"Optional arguments {cl_parser.get_opt_argv()}")
+    print(f"Optional files {cl_parser.get_opt_files()}")
     print(f"Optional parameter file(s) {cl_parser.get_param_files()}")
     print(f"Optional propagation file(s) {cl_parser.get_propag_files()}")
     print(f"Optional HEL file(s) {cl_parser.get_HEL_files()}")
