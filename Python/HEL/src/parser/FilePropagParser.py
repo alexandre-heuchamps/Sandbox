@@ -8,8 +8,8 @@ class FilePropagParser(FileParser):
 
     __req_kw: Tuple[str, ...] = ("-propag")
 
-    def __init__(self, file: str) -> None:
-        self._file: str = file
+    def __init__(self, files: list[str]) -> None:
+        self._files: list[str] = files
 
     # ==========================================================================
     @classmethod
@@ -19,6 +19,6 @@ class FilePropagParser(FileParser):
 
     # ==========================================================================
     @property
-    def file(self) -> str:
-        return self._file
+    def files(self) -> list[str]:
+        return self._files
     # ==========================================================================
