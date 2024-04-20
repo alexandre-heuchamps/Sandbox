@@ -1,20 +1,16 @@
 from typing import Dict, Tuple, Union
-from Pulse import Pulse
-from Exceptions import InvalidKeyError
 
 
 class HEL:
     """ Class for parametric high-energy laser (HEL) representation """
 
-    __cnt = 0
+    __cnt: int = 0
 
     def __init__(self,
                     name: str = "HEL1",
                     wavelength: float = 1e-6,
                     P: float = 1.0,
                     M2: float = 1.2,
-                    div: float = 1e-3,
-                    pulse_params: Dict[str, float] = {"T": 1.0, "D": 0.5},
                     J: float = 1e-3,
                     w0: float = 2.5e-3,
                     r0: float = 1.0,
@@ -33,10 +29,6 @@ class HEL:
             Power of the HEL
         M2: <class 'float'> (default: 1.2)
             Beam quality of the HEL
-        div: <class 'float'> (default: 1e-3)
-            Divergence of the HEL
-        pulse_params: <class 'dict'> (default: {"T": 1.0, "D": 0.5})
-            Pulse parametres of the HEL
         J: <class 'float'> (default: 1e-3)
             Jitter of the HEL
         w0: <class 'float'> (default: 2.5e-3)
@@ -52,8 +44,6 @@ class HEL:
         self._wavelength: float = wavelength
         self._P: float = P
         self._M2: float = M2
-        self._div: float = div
-        self._pulse_params: Dict[str, float] = pulse_params
         self._J: float = J
         self._w0: float = w0
         self._r0: float = r0
@@ -113,43 +103,7 @@ class HEL:
     @M2.setter
     def M2(self, M2: float = 1.65) -> None:
         self._M2 = M2
-    # ==========================================================================
-
-    # ==========================================================================
-    @property
-    def div(self) -> float:
-        """ Get or set the HEL beam divergence """
-        return self._div
-
-    @div.setter
-    def div(self, div: float = 1.23e-6) -> None:
-        self._div = div
-    # ==========================================================================
-
-    # ==========================================================================
-    @property
-    def pulse_params(self) -> Dict[str, float]:
-        """ Get or set the HEL pulse parametres """
-        return self._pulse_params
-
-    @pulse_params.setter
-    def pulse_params(self,
-                        pulse_params: Union[Dict[str, float], Tuple[str, float]]
-                    ) -> None:
-        if isinstance(pulse_params, dict):
-            if set(pulse_params.keys()).issubset(Pulse.params()):
-                self._pulse_params = pulse_params
-            else:
-                raise InvalidKeyError(Pulse.params())
-        elif isinstance(pulse_params, tuple) and len(Pulse.params()) == 2:
-            key, value = pulse_params
-            if key in {"T", "D"}:
-                self._pulse_params[key] = value
-            else:
-                raise InvalidKeyError(Pulse.params())
-        else:
-            raise ValueError(f"Input must be a dict or a tuple of length {len(Pulse.params())}")
-    # ==========================================================================
+    # =========================================================================
 
     # ==========================================================================
     @property
