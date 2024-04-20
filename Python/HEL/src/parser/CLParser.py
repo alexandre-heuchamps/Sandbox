@@ -3,17 +3,13 @@ from typing import Tuple
 from FileParser import FileParser
 from FileParamParser import FileParamParser
 from FilePropagParser import FilePropagParser
-from HELParamParser import HELParamParser
-from HELPropagParser import HELPropagParser
-from DroneParamParser import DroneParamParser
-from DronePropagParser import DronePropagParser
 
 
 
 class CLParser:
     """ Class for parsing command line """
 
-    __req_kw: Tuple[str, ...] = ('-nHEL', '-nDrone')
+    _req_kw: Tuple[str, ...] = ('-nHEL', '-nDrone')
 
     def __init__(self) -> None:
         self._argv: list[str] = sys.argv
@@ -24,15 +20,15 @@ class CLParser:
     def get_req_kw(cls) -> Tuple[str, ...]:
         """ Function returning a tuple containing the mandatory keywords to be
         found in the command line """
-        return __class__.__req_kw
+        return cls._req_kw
     # ==========================================================================
 
     # ==========================================================================
     @classmethod
     def are_req_kw_in_CL(cls) -> bool:
         """ Function checking if command line contains required keywords """
-        cl = [kw for kw in sys.argv if kw in cls.__req_kw]
-        return True if len(cl) == len(cls.__req_kw) else False
+        cl = [kw for kw in sys.argv if kw in cls._req_kw]
+        return True if len(cl) == len(cls._req_kw) else False
     # ==========================================================================
 
     # ==========================================================================
@@ -42,7 +38,7 @@ class CLParser:
         line input. That length is computed as 2 times the number of required
         keywords (as each of those need a value), plus the name of the file to
         run """
-        return 2 * len(__class__.__req_kw) + 1
+        return 2 * len(cls._req_kw) + 1
     # ==========================================================================
 
     # ==========================================================================
@@ -56,12 +52,12 @@ class CLParser:
     def argc(self) -> int:
         """ Function returning the number of inputs on the command line """
         argc = len(self._argv)
-        if ((argc >= __class__.get_min_argc()) and __class__.are_req_kw_in_CL()):
+        if ((argc >= CLParser.get_min_argc()) and CLParser.are_req_kw_in_CL()):
             return argc
-        elif ((argc >= __class__.get_min_argc()) and not __class__.are_req_kw_in_CL()):
+        elif ((argc >= CLParser.get_min_argc()) and not CLParser.are_req_kw_in_CL()):
             raise ValueError(f"Wrong CL input. Missing required keyword(s)")
         else:
-            raise ValueError(f"Wrong CL input: at least {__class__.get_min_argc() - argc} inputs missing")
+            raise ValueError(f"Wrong CL input: at least {CLParser.get_min_argc() - argc} inputs missing")
     # ==========================================================================
 
     # ==========================================================================
