@@ -1,8 +1,8 @@
 import sys
 from typing import Tuple
-from FileParser import FileParser
-from FileParamParser import FileParamParser
-from FilePropagParser import FilePropagParser
+from .FileParser import FileParser
+from .FileParamParser import FileParamParser
+from .FilePropagParser import FilePropagParser
 
 
 

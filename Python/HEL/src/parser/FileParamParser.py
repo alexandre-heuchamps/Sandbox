@@ -1,4 +1,4 @@
-from FileParser import FileParser
+from .FileParser import FileParser
 
 
 
