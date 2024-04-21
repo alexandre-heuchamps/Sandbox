@@ -15,8 +15,8 @@ class FileParamParser(FileParser):
         data of the requested column """
         data = []
         for df in super().get_dfs():
-            for data in df:
-                data.append(list(data[column_name]))
+            for d in df:
+                data.append(list(d[column_name]))
         return data
 
     def get_names_in_files(self) -> list[list[str]]:
