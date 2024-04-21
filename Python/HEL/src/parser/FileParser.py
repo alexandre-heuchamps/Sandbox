@@ -53,7 +53,7 @@ class FileParser:
         names = []
         for f in self._files:
             f_xlsx = self.get_Excel_file(file = f)
-            names.append([s_name for s_name in f_xlsx.sheet_names])
+            names.append([s_name.strip() for s_name in f_xlsx.sheet_names])
             f_xlsx.close()
         return names
     # ==========================================================================
