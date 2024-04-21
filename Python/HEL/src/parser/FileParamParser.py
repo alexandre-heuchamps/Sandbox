@@ -10,9 +10,15 @@ class FileParamParser(FileParser):
     def __init__(self, files: list[str]) -> None:
         super().__init__(files = files)
 
-    def get_names_in_files(self) -> list[list[str]]:
-        names = []
+    def get_column_content(self, column_name: str) -> list[list[str]]:
+        """ Function returning a list of list of strings corresponding to the
+        data of the requested column """
+        data = []
         for df in super().get_dfs():
             for data in df:
-                names.append(list(data["Name"]))
-        return names
+                data.append(list(data[column_name]))
+        return data
+
+    def get_names_in_files(self) -> list[list[str]]:
+        """ Function returning all the names contained in the files """
+        return self.get_column_content(column_name = "Name")
