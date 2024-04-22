@@ -70,3 +70,12 @@ class HELParamParser(FileParamParser):
             x0_list.append([float(x) for x in x0])
         return x0_list
     # ==========================================================================
+
+    # ==========================================================================
+    def get_y0s(self) -> list[float]:
+        y0s = super().get_column_content("y0")
+        y0_list = []
+        for y0 in y0s:
+            y0_list.append([float(y) for y in y0])
+        return y0_list
+    # ==========================================================================
