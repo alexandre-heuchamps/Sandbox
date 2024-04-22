@@ -43,3 +43,12 @@ class HELParamParser(FileParamParser):
             J_list.append([float(j) for j in J])
         return J_list
     # ==========================================================================
+
+    # ==========================================================================
+    def get_w0s(self) -> list[float]:
+        w0s = super().get_column_content("w0")
+        w0_list = []
+        for w0 in w0s:
+            w0_list.append([float(j) for j in w0])
+        return w0_list
+    # ==========================================================================
