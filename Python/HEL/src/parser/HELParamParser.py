@@ -55,7 +55,7 @@ class HELParamParser(FileParamParser):
 
     # ==========================================================================
     def get_r0s(self) -> list[float]:
-        r0s = super().get_column_content("w0")
+        r0s = super().get_column_content("r0")
         r0_list = []
         for r0 in r0s:
             r0_list.append([float(j) for j in r0])
