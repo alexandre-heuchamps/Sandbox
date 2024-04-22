@@ -79,6 +79,14 @@ class Simulator:
         nHEL = self._cl_parser.get_nHEL()
         HEL_params = HELParamParser(files = self._cl_parser.get_HEL_param_files())
         HEL_params_names = HEL_params.get_names_in_files()
+        HEL_l = HEL_params.get_wavelengths()
+        HEL_P = HEL_params.get_wavelengths()
+        HEL_M2 = HEL_params.get_M2s()
+        HEL_J = HEL_params.get_M2s()
+        HEL_w0 = HEL_params.get_w0s()
+        HEL_r0 = HEL_params.get_r0s()
+        HEL_x0 = HEL_params.get_init_pos()
+        HEL_order = HEL_params.get_mns()
 
         ndrone = self._cl_parser.get_nDrone()
         drone_params = DroneParamParser(file = self._cl_parser.get_drone_param_files())
@@ -88,12 +96,26 @@ class Simulator:
 
         cnames(names_sheets = drone_propag_sheets, names_col = drone_params_names)
 
-        print("Hey!")
+        for i in range(nHEL):
+            self._HELs.append(
+                HEL(
+                    name = HEL_params_names[0][i],
+                    wavelength = HEL_l[0][i],
+                    P = HEL_P[0][i],
+                    M2 = HEL_M2[0][i],
+                    J = HEL_J[0][i],
+                    w0 = HEL_w0[0][i],
+                    r0 = HEL_r0[0][i],
+                    x0 = HEL_x0[i],
+                    mode = HEL_order[i],
+                )
+            )
     # ==========================================================================
 
     # ==========================================================================
     def run(self) -> None:
-        raise NotImplementedError("Simulation run under construction. Stay tuned!")
+        for i in range(self._cl_parser.get_nHEL()):
+            print(self._HELs[i].__dict__)
     # ==========================================================================
 
 
@@ -107,3 +129,4 @@ if __name__ == "__main__":
     cl_parser = CLParser()
     world = World()
     sim = Simulator(cl_parser = cl_parser, world = world)
+    sim.run()
