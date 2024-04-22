@@ -39,7 +39,7 @@ class ConsistencyCheckerWorld:
 
     # ==========================================================================
     def HEL_in_world_t0(self, HEL: HEL) -> bool:
-        """ Function checking if a given HEL is within the world bounding box """
+        """ Function checking if a HEL is within the world bounding box initially """
         w_xmin: tuple[float, float, float] = self.world.xmin
         w_xmax: tuple[float, float, float] = self.world.xmax
         all_min_ok: bool = all(h0 >= wmin for h0, wmin in zip(HEL.x0, w_xmin))
@@ -49,7 +49,7 @@ class ConsistencyCheckerWorld:
 
     # ==========================================================================
     def HELs_in_world_t0(self) -> list[bool]:
-        """ Function checking if each HEL is within the world bounding box """
+        """ Function checking if each HEL is within the world bounding box initially """
         w_xmin: tuple[float, float, float] = self.world.xmin
         w_xmax: tuple[float, float, float] = self.world.xmax
         is_inside = []
@@ -63,13 +63,13 @@ class ConsistencyCheckerWorld:
 
     # ==========================================================================
     def are_all_HELs_in_t0(self) -> bool:
-        """ Function checking if all HELs are within the world bounding box """
+        """ Function checking if all HELs are within the world bounding box initially """
         return all(self.HELs_in_world_t0())
     # ==========================================================================
 
     # ==========================================================================
     def drone_in_world_t0(self, drone: Drone) -> bool:
-        """ Function checking if a given drone is within the world bounding box """
+        """ Function checking if a given drone is within the world bounding box initially """
         w_xmin: tuple[float, float, float] = self.world.xmin
         w_xmax: tuple[float, float, float] = self.world.xmax
         all_min_ok: bool = all(d0 >= wmin for d0, wmin in zip(drone.x0, w_xmin))
@@ -79,7 +79,7 @@ class ConsistencyCheckerWorld:
 
     # ==========================================================================
     def drones_in_world_t0(self) -> list[bool]:
-        """ Function checking if each drone is within the world bounding box """
+        """ Function checking if each drone is within the world bounding box initially """
         w_xmin: tuple[float, float, float] = self.world.xmin
         w_xmax: tuple[float, float, float] = self.world.xmax
         is_inside = []
@@ -93,9 +93,67 @@ class ConsistencyCheckerWorld:
 
     # ==========================================================================
     def are_all_drones_in_t0(self) -> bool:
-        """ Function checking if all HELs are within the world bounding box """
+        """ Function checking if all HELs are within the world bounding box initially """
         return all(self.drones_in_world_t0())
     # ==========================================================================
+
+    # ==========================================================================
+    def HEL_in_world_n(self, HEL: HEL, n: int) -> bool:
+        """ Function checking if a HEL is within the world bounding box at iteration n """
+        if n == 0:
+            return self.HEL_in_world_t0(HEL = HEL)
+        else:
+            raise NotImplementedError("HEL_in_world_n not implemented for time n")
+    # ==========================================================================
+
+    # ==========================================================================
+    def HELs_in_world_n(self, n: int) -> list[bool]:
+        """ Function checking if each HEL is within the world bounding box at iteration n """
+        if n == 0:
+            return self.HELs_in_world_t0()
+        else:
+            raise NotImplementedError("HELs_in_world_n not implemented for time n")
+    # ==========================================================================
+
+    # ==========================================================================
+    def are_all_HELs_in_n(self, n: int) -> bool:
+        """ Function checking if all HELs are within the world bounding box at iteration n """
+        if n == 0:
+            return self.are_all_HELs_in_t0()
+        else:
+            raise NotImplementedError("are_all_HELs_in_n not implemented for time n")
+    # ==========================================================================
+
+    # ==========================================================================
+    def drone_in_world_n(self, drone: Drone, n: int) -> bool:
+        """ Function checking if a drone is within the world bounding box at iteration n """
+        if n == 0:
+            return self.drone_in_world_t0(drone = drone)
+        else:
+            raise NotImplementedError("drone_in_world_n not implemented for time n")
+    # ==========================================================================
+
+    # ==========================================================================
+    def drones_in_world_n(self, n: int) -> list[bool]:
+        """ Function checking if each drone is within the world bounding box at iteration n """
+        if n == 0:
+            return self.drones_in_world_t0()
+        else:
+            raise NotImplementedError("drones_in_world_n not implemented for time n")
+    # ==========================================================================
+
+    # ==========================================================================
+    def are_all_drones_in_n(self, n: int) -> bool:
+        """ Function checking if all HELs are within the world bounding box at iteration n """
+        if n == 0:
+            return self.are_all_drones_in_t0()
+        else:
+            raise NotImplementedError("are_all_drones_in_n not implemented for time n")
+    # ==========================================================================
+
+
+
+
 
 
 
