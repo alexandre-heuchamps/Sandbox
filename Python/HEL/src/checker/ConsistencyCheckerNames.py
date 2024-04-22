@@ -8,6 +8,9 @@ class ConsistencyCheckerNames:
         self._names_sheets: list[str] = names_sheets
         self._names_col: list[str] = names_col
 
+        if not (self.are_lengths_consistent() and self.are_names_consistency()):
+            raise ValueError("Name consistency error")
+
     # ==========================================================================
     @property
     def names_sheets(self) -> list[str]:
