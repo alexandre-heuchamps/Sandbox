@@ -1,4 +1,9 @@
+from ..checker.ConsistencyCheckerWorld import ConsistencyCheckerWorld as cworld
+from ..checker.ConsistencyCheckerNames import ConsistencyCheckerNames as cnames
 from ..parser.CLParser import CLParser
+from ..parser.DroneParamParser import DroneParamParser
+from ..parser.DronePropagParser import DronePropagParser
+from ..parser.HELParamParser import HELParamParser
 from .HEL import HEL
 from .Drone import Drone
 from .World import World
@@ -71,7 +76,19 @@ class Simulator:
 
     # ==========================================================================
     def initialisation_with_file(self) -> None:
-        raise NotImplementedError("Simulation initialisation with input file under construction. Stay tuned!")
+        nHEL = self._cl_parser.get_nHEL()
+        HEL_params = HELParamParser(files = self._cl_parser.get_HEL_param_files())
+        HEL_params_names = HEL_params.get_names_in_files()
+
+        ndrone = self._cl_parser.get_nDrone()
+        drone_params = DroneParamParser(file = self._cl_parser.get_drone_param_files())
+        drone_params_names = drone_params.get_names_in_files()
+        drone_propag = DronePropagParser(file = self._cl_parser.get_drone_propag_files())
+        drone_propag_sheets = drone_propag.get_sheet_names()
+
+        cnames(names_sheets = drone_propag_sheets, names_col = drone_params_names)
+
+        print("Hey!")
     # ==========================================================================
 
     # ==========================================================================
