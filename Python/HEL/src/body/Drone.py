@@ -35,7 +35,7 @@ class Drone:
         self._dam_fluence: float = dam_fluence
         self._dims: Tuple[float, float, float] = dims
         self._id: int = id
-        self_priority: int = priority
+        self._priority: int = priority
         self._is_alive: bool = is_alive
 
     # ==========================================================================
