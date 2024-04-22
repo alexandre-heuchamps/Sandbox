@@ -13,7 +13,7 @@ class HELParamParser(FileParamParser):
         lambdas = super().get_column_content("wavelength")
         lambda_list = []
         for lmbda in lambdas:
-            lambda_list.append([float(ll) for ll in lmbda])
+            lambda_list.append([float(l) for l in lmbda])
         return lambda_list
     # ==========================================================================
 
@@ -33,4 +33,13 @@ class HELParamParser(FileParamParser):
         for M2 in M2s:
             M2_list.append([float(m2) for m2 in M2])
         return M2_list
+    # ==========================================================================
+
+    # ==========================================================================
+    def get_Js(self) -> list[float]:
+        Js = super().get_column_content("J")
+        J_list = []
+        for J in Js:
+            J_list.append([float(j) for j in J])
+        return J_list
     # ==========================================================================
