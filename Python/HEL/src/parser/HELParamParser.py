@@ -106,3 +106,12 @@ class HELParamParser(FileParamParser):
             m_list.append([float(z) for z in m])
         return m_list
     # ==========================================================================
+
+    # ==========================================================================
+    def get_ns(self) -> list[float]:
+        ns = super().get_column_content("n")
+        n_list = []
+        for n in ns:
+            n_list.append([float(z) for z in n])
+        return n_list
+    # ==========================================================================
