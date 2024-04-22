@@ -88,3 +88,12 @@ class HELParamParser(FileParamParser):
             z0_list.append([float(z) for z in z0])
         return z0_list
     # ==========================================================================
+
+    # ==========================================================================
+    def get_init_pos(self) -> list[tuple[float, float, float]]:
+        x0s, y0s, z0s = self.get_x0s(), self.get_y0s(), self.get_z0s()
+        init_pos_list = []
+        for x0, y0, z0 in zip(x0s, y0s, z0s):
+            init_pos_list.extend(tuple(pos) for pos in zip(x0, y0, z0))
+        return init_pos_list
+    # ==========================================================================
