@@ -99,19 +99,28 @@ class HELParamParser(FileParamParser):
     # ==========================================================================
 
     # ==========================================================================
-    def get_ms(self) -> list[float]:
+    def get_ms(self) -> list[int]:
         ms = super().get_column_content("m")
         m_list = []
         for m in ms:
-            m_list.append([float(z) for z in m])
+            m_list.append([int(z) for z in m])
         return m_list
     # ==========================================================================
 
     # ==========================================================================
-    def get_ns(self) -> list[float]:
+    def get_ns(self) -> list[int]:
         ns = super().get_column_content("n")
         n_list = []
         for n in ns:
-            n_list.append([float(z) for z in n])
+            n_list.append([int(z) for z in n])
         return n_list
+    # ==========================================================================
+
+    # ==========================================================================
+    def get_mns(self) -> list[tuple[int, int]]:
+        ms, ns = self.get_ms(), self.get_ns()
+        order_list = []
+        for m, n in zip(ms, ns):
+            order_list.extend(tuple(order) for order in zip(m, n))
+        return order_list
     # ==========================================================================
