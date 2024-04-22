@@ -1,4 +1,4 @@
-from FileParamParser import FileParamParser
+from .FileParamParser import FileParamParser
 
 
 
