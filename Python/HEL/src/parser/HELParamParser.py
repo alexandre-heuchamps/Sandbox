@@ -97,3 +97,12 @@ class HELParamParser(FileParamParser):
             init_pos_list.extend(tuple(pos) for pos in zip(x0, y0, z0))
         return init_pos_list
     # ==========================================================================
+
+    # ==========================================================================
+    def get_ms(self) -> list[float]:
+        ms = super().get_column_content("m")
+        m_list = []
+        for m in ms:
+            m_list.append([float(z) for z in m])
+        return m_list
+    # ==========================================================================
