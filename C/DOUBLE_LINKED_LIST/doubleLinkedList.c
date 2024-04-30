@@ -32,16 +32,25 @@ void
 insert_start(Node** headRef, int data)
 {
     Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = data;
-    newNode->next = *headRef;
-    newNode->prev = NULL;
 
-    if (*headRef != NULL)
+    if(NULL == newNode)
     {
-        (*headRef)->prev = newNode;
+        fprintf(stderr, "Failed to insert new node in start position.\n");
+        return;
     }
+    else
+    {
+        newNode->data = data;
+        newNode->next = *headRef;
+        newNode->prev = NULL;
 
-    *headRef = newNode;
+        if (*headRef != NULL)
+        {
+            (*headRef)->prev = newNode;
+        }
+
+        *headRef = newNode;
+    }
 }
 
 
@@ -58,22 +67,31 @@ void
 insert_end(Node** headRef, int data)
 {
     Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = data;
-    newNode->next = NULL;
 
-    if (*headRef == NULL)
+    if(NULL == newNode)
     {
-        newNode->prev = NULL;
-        *headRef = newNode;
+        fprintf(stderr, "Failed to insert new node in end position.\n");
+        return;
     }
     else
     {
-        Node* last = *headRef;
-        while (last->next != NULL) {
-            last = last->next;
+        newNode->data = data;
+        newNode->next = NULL;
+
+        if (NULL == *headRef)
+        {
+            newNode->prev = NULL;
+            *headRef = newNode;
         }
-        last->next = newNode;
-        newNode->prev = last;
+        else
+        {
+            Node* last = *headRef;
+            while (last->next != NULL) {
+                last = last->next;
+            }
+            last->next = newNode;
+            newNode->prev = last;
+        }
     }
 }
 
@@ -90,20 +108,22 @@ insert_end(Node** headRef, int data)
 void
 delete_start(Node** headRef)
 {
-    if (*headRef == NULL)
+    if (NULL == *headRef)
     {
         return;
     }
-
-    Node* nextNode = (*headRef)->next;
-    free(*headRef);
-
-    if (nextNode != NULL)
+    else
     {
-        nextNode->prev = NULL;
-    }
+        Node* nextNode = (*headRef)->next;
+        free(*headRef);
 
-    *headRef = nextNode;
+        if (nextNode != NULL)
+        {
+            nextNode->prev = NULL;
+        }
+
+        *headRef = nextNode;
+    }
 }
 
 
@@ -119,27 +139,29 @@ delete_start(Node** headRef)
 void
 delete_end(Node** headRef)
 {
-    if (*headRef == NULL)
+    if (NULL == *headRef)
     {
         return;
     }
-
-    Node* last = *headRef;
-    while (last->next != NULL)
-    {
-        last = last->next;
-    }
-
-    if (last->prev != NULL)
-    {
-        last->prev->next = NULL;
-    }
     else
     {
-        *headRef = NULL;
-    }
+        Node* last = *headRef;
+        while (last->next != NULL)
+        {
+            last = last->next;
+        }
 
-    free(last);
+        if (last->prev != NULL)
+        {
+            last->prev->next = NULL;
+        }
+        else
+        {
+            *headRef = NULL;
+        }
+
+        free(last);
+    }
 }
 
 
@@ -155,37 +177,39 @@ delete_end(Node** headRef)
 void
 delete_position(Node** headRef, unsigned int position)
 {
-    if (*headRef == NULL)
+    if (NULL == *headRef)
     {
         return;
     }
-
-    Node* temp = *headRef;
-    unsigned int count = 0;
-
-    while (temp != NULL && count < position)
+    else
     {
-        temp = temp->next;
-        count++;
-    }
+        Node* temp = *headRef;
+        unsigned int count = 0;
 
-    if (temp != NULL)
-    {
-        if (temp->prev != NULL)
+        while (temp != NULL && count < position)
         {
-            temp->prev->next = temp->next;
-        }
-        else
-        {
-            *headRef = temp->next;
+            temp = temp->next;
+            count++;
         }
 
-        if (temp->next != NULL)
+        if (temp != NULL)
         {
-            temp->next->prev = temp->prev;
-        }
+            if (temp->prev != NULL)
+            {
+                temp->prev->next = temp->next;
+            }
+            else
+            {
+                *headRef = temp->next;
+            }
 
-        free(temp);
+            if (temp->next != NULL)
+            {
+                temp->next->prev = temp->prev;
+            }
+
+            free(temp);
+        }
     }
 }
 
