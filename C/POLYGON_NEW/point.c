@@ -40,14 +40,13 @@ void *free_point(point *pt)
     if(NULL == pt)
     {
         fprintf(stderr, "Could not free point.\n");
-        return NULL;
     }
     else
     {
         free(pt);
         pt = NULL;
-        return NULL;
     }
+    return NULL;
 }
 
 
@@ -59,13 +58,12 @@ void *set_x_point(point *pt, float x)
     if(NULL == pt)
     {
         fprintf(stderr, "Cannot set 'x' of point.\n");
-        return NULL;
     }
     else
     {
         pt -> x = x;
-        return NULL;
     }
+    return NULL;
 }
 
 
@@ -77,13 +75,12 @@ void *set_y_point(point *pt, float y)
     if(NULL == pt)
     {
         fprintf(stderr, "Cannot set 'y' of point.\n");
-        return NULL;
     }
     else
     {
         pt -> y = y;
-        return NULL;
     }
+    return NULL;
 }
 
 
@@ -117,4 +114,22 @@ float get_y_point(const point *pt)
     {
         return pt -> y;
     }
+}
+
+
+
+
+
+void *init_point(point *pt, float x, float y)
+{
+    if(NULL == pt)
+    {
+        fprintf(stderr, "Cannot initialise point.\n");
+    }
+    else
+    {
+        pt -> x = x;
+        pt -> y = y;
+    }
+    return NULL;
 }
