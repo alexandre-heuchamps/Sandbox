@@ -49,3 +49,21 @@ void *free_point(point *pt)
         return NULL;
     }
 }
+
+
+
+
+
+void *set_x_point(point *pt, float x)
+{
+    if(NULL == pt)
+    {
+        fprintf(stderr, "Cannot set 'x' of point.\n");
+        return NULL;
+    }
+    else
+    {
+        pt -> x = x;
+        return NULL;
+    }
+}
