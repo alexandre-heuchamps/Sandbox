@@ -101,3 +101,20 @@ float get_x_point(const point *pt)
         return pt -> x;
     }
 }
+
+
+
+
+
+float get_y_point(const point *pt)
+{
+    if(NULL == pt)
+    {
+        fprintf(stderr, "Cannot get 'y' from point.\n");
+        return -1.0;
+    }
+    else
+    {
+        return pt -> y;
+    }
+}
