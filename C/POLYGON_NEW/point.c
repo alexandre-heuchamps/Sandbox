@@ -133,3 +133,20 @@ void *init_point(point *pt, float x, float y)
     }
     return NULL;
 }
+
+
+
+
+
+void *print_point(const point *pt)
+{
+    if(NULL == pt)
+    {
+        fprintf(stderr, "Cannot print point information");
+    }
+    else
+    {
+        printf("(x, y) = (%lf, %lf)\n", get_x_point(pt), get_y_point(pt));
+    }
+    return NULL;
+}
