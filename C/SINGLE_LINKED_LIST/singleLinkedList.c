@@ -11,7 +11,8 @@
 
 
 // Define the Node data structure
-typedef struct Node {
+typedef struct Node
+{
     int data;
     struct Node* next;
 } Node;
@@ -26,11 +27,22 @@ typedef struct Node {
 
 
 // Function to insert a node at the start of the linked list
-void insert_start(Node** headRef, int data) {
+void
+insert_start(Node** headRef, int data)
+{
     Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = data;
-    newNode->next = *headRef;
-    *headRef = newNode;
+
+    if(NULL == newNode)
+    {
+        fprintf(stderr, "Failed to insert new node in start position.\n");
+        return;
+    }
+    else
+    {
+        newNode->data = data;
+        newNode->next = *headRef;
+        *headRef = newNode;
+    }
 }
 
 
@@ -43,19 +55,34 @@ void insert_start(Node** headRef, int data) {
 
 
 // Function to insert a node at the end of the linked list
-void insert_end(Node** headRef, int data) {
+void
+insert_end(Node** headRef, int data)
+{
     Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = data;
-    newNode->next = NULL;
 
-    if (*headRef == NULL) {
-        *headRef = newNode;
-    } else {
-        Node* last = *headRef;
-        while (last->next != NULL) {
-            last = last->next;
+    if(NULL == newNode)
+    {
+        fprintf(stderr, "Failed to insert new node in end position.\n");
+        return;
+    }
+    else
+    {
+
+        newNode->data = data;
+        newNode->next = NULL;
+
+        if (NULL == *headRef)
+        {
+            *headRef = newNode;
         }
-        last->next = newNode;
+        else
+        {
+            Node* last = *headRef;
+            while (last->next != NULL) {
+                last = last->next;
+            }
+            last->next = newNode;
+        }
     }
 }
 
@@ -69,14 +96,19 @@ void insert_end(Node** headRef, int data) {
 
 
 // Function to delete the first node of the linked list
-void delete_start(Node** headRef) {
-    if (*headRef == NULL) {
+void
+delete_start(Node** headRef)
+{
+    if (NULL == *headRef)
+    {
         return;
     }
-
-    Node* nextNode = (*headRef)->next;
-    free(*headRef);
-    *headRef = nextNode;
+    else
+    {
+        Node* nextNode = (*headRef)->next;
+        free(*headRef);
+        *headRef = nextNode;
+    }
 }
 
 
@@ -89,22 +121,31 @@ void delete_start(Node** headRef) {
 
 
 // Function to delete the last node of the linked list
-void delete_end(Node** headRef) {
-    if (*headRef == NULL) {
+void
+delete_end(Node** headRef)
+{
+    if (NULL == *headRef)
+    {
         return;
     }
-
-    if ((*headRef)->next == NULL) {
-        free(*headRef);
-        *headRef = NULL;
-    } else {
-        Node* secondLast = *headRef;
-        while (secondLast->next->next != NULL) {
-            secondLast = secondLast->next;
+    else
+    {
+        if ((*headRef)->next == NULL)
+        {
+            free(*headRef);
+            *headRef = NULL;
         }
+        else
+        {
+            Node* secondLast = *headRef;
+            while (secondLast->next->next != NULL)
+            {
+                secondLast = secondLast->next;
+            }
 
-        free(secondLast->next);
-        secondLast->next = NULL;
+            free(secondLast->next);
+            secondLast->next = NULL;
+        }
     }
 }
 
@@ -118,28 +159,40 @@ void delete_end(Node** headRef) {
 
 
 // Function to delete a node at a specific position in the linked list
-void delete_position(Node** headRef, unsigned int position) {
-    if (*headRef == NULL) {
+void
+delete_position(Node** headRef, unsigned int position)
+{
+    if (NULL == *headRef)
+    {
         return;
     }
-
-    if (position == 0) {
-        delete_start(headRef);
-    } else {
-        Node* temp = *headRef;
-        unsigned int count = 0;
-
-        while (temp != NULL && count < position - 1) {
-            temp = temp->next;
-            count++;
+    else
+    {
+        if (position == 0)
+        {
+            delete_start(headRef);
         }
+        else
+        {
+            Node* temp = *headRef;
+            unsigned int count = 0;
 
-        if (temp == NULL || temp->next == NULL) {
-            delete_end(headRef);
-        } else {
-            Node* nextNode = temp->next->next;
-            free(temp->next);
-            temp->next = nextNode;
+            while (temp != NULL && count < position - 1)
+            {
+                temp = temp->next;
+                count++;
+            }
+
+            if (temp == NULL || temp->next == NULL)
+            {
+                delete_end(headRef);
+            }
+            else
+            {
+                Node* nextNode = temp->next->next;
+                free(temp->next);
+                temp->next = nextNode;
+            }
         }
     }
 }
@@ -154,8 +207,11 @@ void delete_position(Node** headRef, unsigned int position) {
 
 
 // Function to print the linked list
-void printList(Node* node) {
-    while (node != NULL) {
+void
+printList(Node* node)
+{
+    while (node != NULL)
+    {
         printf("%d ", node->data);
         node = node->next;
     }
@@ -171,11 +227,14 @@ void printList(Node* node) {
 
 
 // Function to free the linked list
-void freeLinkedList(Node** headRef) {
+void
+freeLinkedList(Node** headRef)
+{
     Node* current = *headRef;
     Node* next;
 
-    while (current != NULL) {
+    while (current != NULL)
+    {
         next = current->next;
         free(current);
         current = next;
@@ -193,7 +252,9 @@ void freeLinkedList(Node** headRef) {
 
 
 
-int main() {
+int
+main()
+{
     Node* head = NULL;
 
     insert_start(&head, 1);  // Insert 1 at the start
