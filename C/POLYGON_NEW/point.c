@@ -67,3 +67,21 @@ void *set_x_point(point *pt, float x)
         return NULL;
     }
 }
+
+
+
+
+
+void *set_y_point(point *pt, float y)
+{
+    if(NULL == pt)
+    {
+        fprintf(stderr, "Cannot set 'y' of point.\n");
+        return NULL;
+    }
+    else
+    {
+        pt -> y = y;
+        return NULL;
+    }
+}

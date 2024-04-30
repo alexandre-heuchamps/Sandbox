@@ -6,7 +6,9 @@ int main()
 {
     point *pt = alloc_point();
     float x = 0.0;
+    float y = 2.3;
     set_x_point(pt, x);
+    set_y_point(pt, y);
     free_point(pt);
     return 0;
 }
