@@ -27,6 +27,7 @@ int main()
     set_origin_vector(v, pt);
     set_end_vector(v, pt_rot);
     set_xorigin_vector(v, x);
+    set_yorigin_vector(v, y);
 
 
     free_vector(v);
