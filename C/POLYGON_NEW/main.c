@@ -30,6 +30,7 @@ int main()
     set_yorigin_vector(v, y);
     set_xend_vector(v, x);
     set_yend_vector(v, y);
+    printf("%lf\n", get_xorigin_vector(v));
 
 
     free_vector(v);

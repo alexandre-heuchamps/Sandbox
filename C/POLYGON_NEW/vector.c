@@ -159,3 +159,20 @@ void *set_yend_vector(vector *vec, float y)
     }
     return NULL;
 }
+
+
+
+
+
+float get_xorigin_vector(vector *vec)
+{
+    if(NULL == vec)
+    {
+        fprintf(stderr, "Cannot get x coordinate for vector origin.\n");
+        return -1;
+    }
+    else
+    {
+        return get_x_point(vec -> origin);
+    }
+}
