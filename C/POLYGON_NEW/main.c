@@ -29,6 +29,7 @@ int main()
     set_xorigin_vector(v, x);
     set_yorigin_vector(v, y);
     set_xend_vector(v, x);
+    set_yend_vector(v, y);
 
 
     free_vector(v);

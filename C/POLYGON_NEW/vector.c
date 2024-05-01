@@ -134,11 +134,28 @@ void *set_xend_vector(vector *vec, float x)
 {
     if(NULL == vec)
     {
-        fprintf(stderr, "Cannot set x coordinate for vector origin.\n");
+        fprintf(stderr, "Cannot set x coordinate for vector end.\n");
     }
     else
     {
         set_x_point(vec -> end, x);
+    }
+    return NULL;
+}
+
+
+
+
+
+void *set_yend_vector(vector *vec, float y)
+{
+    if(NULL == vec)
+    {
+        fprintf(stderr, "Cannot set y coordinate for vector end.\n");
+    }
+    else
+    {
+        set_x_point(vec -> end, y);
     }
     return NULL;
 }
