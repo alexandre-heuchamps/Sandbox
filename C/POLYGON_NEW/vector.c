@@ -121,7 +121,7 @@ void *set_yorigin_vector(vector *vec, float y)
     }
     else
     {
-        set_x_point(vec -> origin, y);
+        set_y_point(vec -> origin, y);
     }
     return NULL;
 }
@@ -155,7 +155,7 @@ void *set_yend_vector(vector *vec, float y)
     }
     else
     {
-        set_x_point(vec -> end, y);
+        set_y_point(vec -> end, y);
     }
     return NULL;
 }
@@ -174,5 +174,56 @@ float get_xorigin_vector(const vector *vec)
     else
     {
         return get_x_point(vec -> origin);
+    }
+}
+
+
+
+
+
+float get_yorigin_vector(const vector *vec)
+{
+    if(NULL == vec)
+    {
+        fprintf(stderr, "Cannot get y coordinate for vector origin.\n");
+        return -1;
+    }
+    else
+    {
+        return get_y_point(vec -> origin);
+    }
+}
+
+
+
+
+
+float get_xend_vector(const vector *vec)
+{
+    if(NULL == vec)
+    {
+        fprintf(stderr, "Cannot get x coordinate for vector end.\n");
+        return -1;
+    }
+    else
+    {
+        return get_x_point(vec -> end);
+    }
+}
+
+
+
+
+
+float get_yend_vector(const vector *vec)
+{
+    if(NULL == vec)
+    {
+        fprintf(stderr, "Cannot get y coordinate for vector end.\n");
+        return -1;
+    }
+    else
+    {
+        return get_y_point(vec -> end);
     }
 }
