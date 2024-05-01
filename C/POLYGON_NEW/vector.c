@@ -91,3 +91,20 @@ void *set_end_vector(vector *vec, const point *end)
     }
     return NULL;
 }
+
+
+
+
+
+void *set_xorigin_vector(vector *vec, float x)
+{
+    if(NULL == vec)
+    {
+        fprintf(stderr, "Cannot set x coordinate for vector origin.\n");
+    }
+    else
+    {
+        set_x_point(vec -> origin, x);
+    }
+    return NULL;
+}
