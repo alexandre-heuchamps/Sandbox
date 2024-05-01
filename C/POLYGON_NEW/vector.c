@@ -164,7 +164,7 @@ void *set_yend_vector(vector *vec, float y)
 
 
 
-float get_xorigin_vector(vector *vec)
+float get_xorigin_vector(const vector *vec)
 {
     if(NULL == vec)
     {
