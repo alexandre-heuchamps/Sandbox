@@ -65,3 +65,20 @@ void *set_origin_vector(vector *vec, const point *origin)
     }
     return NULL;
 }
+
+
+
+
+
+void *set_end_vector(vector *vec, const point *end)
+{
+    if(NULL == vec || NULL == end)
+    {
+        fprintf(stderr, "Could not set vector end.\n");
+    }
+    else
+    {
+        vec -> end = end;
+    }
+    return NULL;
+}
