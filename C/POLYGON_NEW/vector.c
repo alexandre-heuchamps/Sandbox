@@ -9,8 +9,8 @@
 
 struct Vector
 {
-    point *origin;
-    point *end;
+    const point *origin;
+    const point *end;
 };
 
 
@@ -45,6 +45,23 @@ void *free_vector(vector *vec)
     else
     {
         free(vec);
+    }
+    return NULL;
+}
+
+
+
+
+
+void *set_origin_vector(vector *vec, const point *origin)
+{
+    if(NULL == vec || NULL == origin)
+    {
+        fprintf(stderr, "Could not set vector origin.\n");
+    }
+    else
+    {
+        vec -> origin = origin;
     }
     return NULL;
 }
