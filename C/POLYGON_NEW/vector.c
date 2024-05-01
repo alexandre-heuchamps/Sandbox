@@ -114,6 +114,24 @@ void *set_end_vector(vector *vec, const point *end)
 
 
 
+void *init_end_vector(vector *vec, float x, float y)
+{
+    if(NULL == vec)
+    {
+        fprintf(stderr, "Could not initialise vector end.\n");
+    }
+    else
+    {
+        set_x_point(vec -> end, x);
+        set_y_point(vec -> end, y);
+    }
+    return NULL;
+}
+
+
+
+
+
 void *set_xorigin_vector(vector *vec, float x)
 {
     if(NULL == vec)

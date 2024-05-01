@@ -18,6 +18,7 @@ int main()
     vector *v = alloc_vector();
     set_origin_vector(v, pt);
     set_end_vector(v, pt_rot);
+    init_end_vector(v, x, y);
     set_xorigin_vector(v, x);
     set_yorigin_vector(v, y);
     set_xend_vector(v, x);
