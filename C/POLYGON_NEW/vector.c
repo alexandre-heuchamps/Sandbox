@@ -76,6 +76,24 @@ void *set_origin_vector(vector *vec, const point *origin)
 
 
 
+void *init_origin_vector(vector *vec, float x, float y)
+{
+    if(NULL == vec)
+    {
+        fprintf(stderr, "Could not initialise vector origin.\n");
+    }
+    else
+    {
+        set_x_point(vec -> origin, x);
+        set_y_point(vec -> origin, y);
+    }
+    return NULL;
+}
+
+
+
+
+
 void *set_end_vector(vector *vec, const point *end)
 {
     if(NULL == vec || NULL == end)
