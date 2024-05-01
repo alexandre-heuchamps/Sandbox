@@ -125,3 +125,20 @@ void *set_yorigin_vector(vector *vec, float y)
     }
     return NULL;
 }
+
+
+
+
+
+void *set_xend_vector(vector *vec, float x)
+{
+    if(NULL == vec)
+    {
+        fprintf(stderr, "Cannot set x coordinate for vector origin.\n");
+    }
+    else
+    {
+        set_x_point(vec -> end, x);
+    }
+    return NULL;
+}
