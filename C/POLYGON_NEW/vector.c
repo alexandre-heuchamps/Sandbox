@@ -25,12 +25,41 @@ vector *alloc_vector(void)
     if(NULL == vec)
     {
         fprintf(stderr, "Could not allocate vector.\n");
-        return NULL;
+        goto return_NULL;
     }
     else
     {
-        return vec;
+        vec -> origin = malloc(sizeof (vec -> origin));
+
+        if(NULL == vec -> origin)
+        {
+            fprintf(stderr, "Cannot allocate space for vector origin.\n");
+            goto free_vec;
+        }
+        else
+        {
+            vec -> end = malloc(sizeof (vec -> end));
+
+            if(NULL == vec -> end)
+            {
+                fprintf(stderr, "Cannot allocate space for vector end.\n");
+                goto free_origin;
+            }
+            else
+            {
+                return vec;
+            }
+        }
     }
+
+    free_origin:
+        free(vec -> origin);
+        vec -> origin = NULL;
+    free_vec:
+        free(vec);
+        vec = NULL;
+    return_NULL:
+        return NULL;
 }
 
 
