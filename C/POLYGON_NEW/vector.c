@@ -44,6 +44,8 @@ void *free_vector(vector *vec)
     }
     else
     {
+        free_point(vec -> origin);
+        free_point(vec -> end);
         free(vec);
         vec = NULL;
     }
@@ -66,7 +68,6 @@ void *set_origin_vector(vector *vec, const point *origin)
         set_x_point(origin_copy, get_x_point(origin));
         set_y_point(origin_copy, get_y_point(origin));
         vec -> origin = origin_copy;
-        free_point(origin_copy);
     }
     return NULL;
 }
@@ -87,7 +88,6 @@ void *set_end_vector(vector *vec, const point *end)
         set_x_point(end_copy, get_x_point(end));
         set_y_point(end_copy, get_y_point(end));
         vec -> end = end_copy;
-        free_point(end_copy);
     }
     return NULL;
 }
