@@ -19,8 +19,7 @@ float get_xorigin_vector(const vector *vec);
 float get_yorigin_vector(const vector *vec);
 float get_xend_vector(const vector *vec);
 float get_yend_vector(const vector *vec);
-// void *init_point(point *pt, float x, float y);
-// void *print_point(const point *pt);
-// void *rotate_point(point *pt, const point *origin, float ang);
+void *print_vector(const vector *vec);
+float get_norm_vector(const vector *vec);
 
 #endif

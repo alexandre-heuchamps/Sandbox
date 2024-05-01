@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include "point.h"
 #include "vector.h"
 
@@ -261,5 +262,45 @@ float get_yend_vector(const vector *vec)
     else
     {
         return get_y_point(vec -> end);
+    }
+}
+
+
+
+
+
+void *print_vector(const vector *vec)
+{
+    if(NULL == vec)
+    {
+        fprintf(stderr, "Could not print vector information.\n");
+    }
+    else
+    {
+        printf("vector origin: (%lf, %lf)\n", get_xorigin_vector(vec), get_yorigin_vector(vec));
+        printf("vector end: (%lf, %lf)\n", get_xend_vector(vec), get_yend_vector(vec));
+    }
+    return NULL;
+}
+
+
+
+
+
+float get_norm_vector(const vector *vec)
+{
+    if(NULL == vec)
+    {
+        fprintf(stderr, "Could not compute vector norm.\n");
+        return -1.0;
+    }
+    else
+    {
+        float x0 = get_xorigin_vector(vec);
+        float y0 = get_yorigin_vector(vec);
+        float x1 = get_xend_vector(vec);
+        float y1 = get_yend_vector(vec);
+        float norm2 = (x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0);
+        return sqrt(norm2);
     }
 }
