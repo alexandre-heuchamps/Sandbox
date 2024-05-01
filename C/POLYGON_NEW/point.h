@@ -11,6 +11,5 @@ float get_x_point(const point *pt);
 float get_y_point(const point *pt);
 void *init_point(point *pt, float x, float y);
 void *print_point(const point *pt);
-void *rotate_point(point *pt, const point *origin, float ang);
 
 #endif

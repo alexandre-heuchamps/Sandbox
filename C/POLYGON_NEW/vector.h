@@ -1,8 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include "point.h"
-
 typedef struct Vector vector;
 
 vector *alloc_vector(void);
