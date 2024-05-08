@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.spatial.transform import Rotation as R
+import scipy as sp
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -123,7 +123,7 @@ class Frustum:
         zaxis = [0.0, 0.0, 1.0]
         rot_vector = np.cross(zaxis, self.v)
         rot_angle = np.arccos(np.dot(zaxis, self.v))
-        rotation = R.from_rotvec(rot_angle * rot_vector)
+        rotation = sp.spatial.transform.Rotation.from_rotvec(rot_angle * rot_vector)
         x = np.ravel(x) - self.c[0]
         y = np.ravel(y) - self.c[1]
         z = np.ravel(z) - self.c[2]
