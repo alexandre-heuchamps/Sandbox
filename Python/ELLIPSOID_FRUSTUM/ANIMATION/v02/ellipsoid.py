@@ -21,6 +21,7 @@ class Ellipsoid:
         self._lz: float = lz
         self._Sigma: np.ndarray = np.diag([(1/self._lx)**2, (1/self._ly)**2, (1/self._lz)**2])
         self._U: np.ndarray = np.array(U)
+        self._original_U: np.ndarray = np.array(U)
 
         # Precompute the mesh for a unit sphere
         # -------------------------------------
@@ -154,8 +155,9 @@ class Ellipsoid:
 
     # ==========================================================================
     def rotate(self, theta, phi) -> None:
+        self._U = self._original_U.copy()
         # Create a rotation matrix from the angles
-        r = sp.spatial.transform.Rotation.from_euler('ZYX', [theta, 0, phi])
+        r = sp.spatial.transform.Rotation.from_euler('ZXY', [-theta, 0.0, phi])
         # Apply the rotation matrix to U
         self._U = r.apply(self._U)
     # ==========================================================================

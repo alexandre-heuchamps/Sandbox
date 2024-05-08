@@ -14,22 +14,23 @@ from ellipsoid import Ellipsoid
 def animate(t, ell, slerp_e, ce_interp, frustum, h_f, vec_f, ax):
     ell.c = [ce_interp[0](t), ce_interp[1](t), ce_interp[2](t)]
     rotation_e = slerp_e(t)
-    ell.rotate(np.pi / 6.0, 0.0)
-    # xmesh_e, ymesh_e, zmesh_e = ell.get_rotated_mesh()
-    # surf_e = ax.plot_surface(xmesh_e, ymesh_e, zmesh_e, color = 'b', alpha = .5)
+    theta, phi = rotation_e.as_euler('ZYX')[0], rotation_e.as_euler('ZYX')[2]
+    ell.rotate(theta, phi)
+    xmesh_e, ymesh_e, zmesh_e = ell.get_rotated_mesh()
+    surf_e = ax.plot_surface(xmesh_e, ymesh_e, zmesh_e, color = 'b', alpha = .5)
 
-    frustum.h = h_f(t)
-    frustum.v = [vec_f[0](t), vec_f[1](t), vec_f[2](t)]
-    frustum.orient_frustum()
-    surf_f = ax.plot_surface(frustum.x, frustum.y, frustum.z, color = 'r', alpha = .5)
+    # frustum.h = h_f(t)
+    # frustum.v = [vec_f[0](t), vec_f[1](t), vec_f[2](t)]
+    # frustum.orient_frustum()
+    # surf_f = ax.plot_surface(frustum.x, frustum.y, frustum.z, color = 'r', alpha = .5)
 
     # If 'surfaces' doesn't exist in the animate function's namespace, create it
     if not hasattr(animate, 'surfaces'):
         animate.surfaces = []
 
     # Add the new surface to 'surfaces'
-    # animate.surfaces.append(surf_e)
-    animate.surfaces.append(surf_f)
+    animate.surfaces.append(surf_e)
+    # animate.surfaces.append(surf_f)
 
     # If there are more than 1 surfaces, remove the oldest one
     if len(animate.surfaces) > 1:
@@ -62,10 +63,13 @@ if __name__ == "__main__":
     # Ellipsoid
     cx_e = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
     cy_e = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5]
-    cz_e = [5.0, 1.0, .5, .5, .5, .5]
+    cz_e = [5.0, 1.0, 0.5, 0.5, 0.5, 0.5]
+    # cx_e = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    # cy_e = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    # cz_e = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
     ce = list(zip(cx_e, cy_e, cz_e))
-    ktheta_e = np.radians([0.0, 23.5, 48.79, 67.2, 80.0, 90.0])
-    kphi_e = np.radians([0.0, 0.0, 0.0, 10.0, 17.5, 17.5])
+    ktheta_e = np.radians([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+    kphi_e = np.radians([0.0, 23.5, 48.79, 67.2, 80.0, 90.0])
     # Frustum
     cx_f = [0.0] * len(cx_e)
     cy_f = [0.0] * len(cy_e)
