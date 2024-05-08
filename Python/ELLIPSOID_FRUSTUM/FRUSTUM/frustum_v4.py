@@ -41,7 +41,7 @@ def orient_frustum(x, y, z, c, v, num_points = 100):
 
     # Rotate the points to align with the vector v
     # Calculate the rotation vector and angle
-    zaxis = [0.0, 0.0, 1]
+    zaxis = [0.0, 0.0, 1.0]
     rot_vector = np.cross(zaxis, v)
     rot_angle = np.arccos(np.dot(zaxis, v))
     rotation = R.from_rotvec(rot_angle * rot_vector)
@@ -74,7 +74,7 @@ x, y, z = create_frustum(r1 = r1, c = c, h = h, alpha = alpha, num_points = npts
 # Plot the frustum
 fig = plt.figure()
 ax = fig.add_subplot(111, projection = "3d")
-ax.plot_surface(x, y, z, color = 'b')
+ax.plot_surface(x, y, z, color = 'b', alpha = 0.05)
 
 # Vector for frustum orientation
 v = [1, 1, 1]
