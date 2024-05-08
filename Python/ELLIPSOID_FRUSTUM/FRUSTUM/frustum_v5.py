@@ -21,6 +21,7 @@ class Frustum:
         self._a: float = a
         self._v: tuple[float, float, float] = v
         self._npts: int = npts
+        self._x, self._y, self._z = self.create_frustum()
 
     # ==========================================================================
     @property
@@ -83,6 +84,36 @@ class Frustum:
     # ==========================================================================
 
     # ==========================================================================
+    @property
+    def x(self) -> np.ndarray:
+        return self._x
+
+    @x.setter
+    def x(self, x: np.ndarray) -> None:
+        self._x = x
+    # ==========================================================================
+
+    # ==========================================================================
+    @property
+    def y(self) -> np.ndarray:
+        return self._y
+
+    @y.setter
+    def y(self, y: np.ndarray) -> None:
+        self._y = y
+    # ==========================================================================
+
+    # ==========================================================================
+    @property
+    def z(self) -> np.ndarray:
+        return self._z
+
+    @z.setter
+    def z(self, z: np.ndarray) -> None:
+        self._z = z
+    # ==========================================================================
+
+    # ==========================================================================
     def create_frustum(self) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         # Create the base of the frustum
         theta = np.linspace(0.0, 2.0 * np.pi, self.npts)
@@ -113,8 +144,6 @@ class Frustum:
 
     # ==========================================================================
     def orient_frustum(self) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-        x, y, z = self.create_frustum()
-
         # Normalize the vector
         self.v = np.array(self.v) / np.linalg.norm(self.v)
 
@@ -124,22 +153,20 @@ class Frustum:
         rot_vector = np.cross(zaxis, self.v)
         rot_angle = np.arccos(np.dot(zaxis, self.v))
         rotation = sp.spatial.transform.Rotation.from_rotvec(rot_angle * rot_vector)
-        x = np.ravel(x) - self.c[0]
-        y = np.ravel(y) - self.c[1]
-        z = np.ravel(z) - self.c[2]
-        points = rotation.apply(np.column_stack((x, y, z)))
+        self.x = np.ravel(self.x) - self.c[0]
+        self.y = np.ravel(self.y) - self.c[1]
+        self.z = np.ravel(self.z) - self.c[2]
+        points = rotation.apply(np.column_stack((self.x, self.y, self.z)))
 
         # Split the points back into x, y, z
-        x = points[:, 0] + self.c[0]
-        y = points[:, 1] + self.c[1]
-        z = points[:, 2] + self.c[2]
+        self.x = points[:, 0] + self.c[0]
+        self.y = points[:, 1] + self.c[1]
+        self.z = points[:, 2] + self.c[2]
 
         # Reshape the arrays into 2D arrays for plot_surface
-        x = x.reshape((2, self.npts))
-        y = y.reshape((2, self.npts))
-        z = z.reshape((2, self.npts))
-
-        return x, y, z
+        self.x = self.x.reshape((2, self.npts))
+        self.y = self.y.reshape((2, self.npts))
+        self.z = self.z.reshape((2, self.npts))
     # ==========================================================================
 
 
@@ -152,13 +179,12 @@ if __name__ == "__main__":
     h = 2.3
 
     frustum = Frustum(r1 = r1, c = cf, h = h, a = alpha)
-    xf, yf, zf = frustum.create_frustum()
-    frustum.v = (1.0, 0.0, 0.0)
-    xfr, yfr, zfr = frustum.orient_frustum()
 
     fig = plt.figure()
     ax = fig.add_subplot(111, projection = "3d")
-    ax.plot_surface(xf, yf, zf, color = 'b', alpha = 0.5)
-    ax.plot_surface(xfr, yfr, zfr, color = 'r', alpha = 0.5)
+    ax.plot_surface(frustum.x, frustum.y, frustum.z, color = 'b', alpha = 0.5)
+    frustum.v = (1.0, 0.0, 0.0)
+    frustum.orient_frustum()
+    ax.plot_surface(frustum.x, frustum.y, frustum.z, color = 'r', alpha = 0.5)
     ax.set_aspect('equal')
     plt.show()
