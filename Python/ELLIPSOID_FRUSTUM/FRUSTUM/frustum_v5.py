@@ -70,6 +70,38 @@ class Frustum:
         self._v = v
     # ==========================================================================
 
+    # ==========================================================================
+    def plot_frustum(self,
+                        ax: Axes3D,
+                        npts: int = 200,
+                    ) -> None:
+        # Create the base of the frustum
+        theta = np.linspace(0.0, 2.0 * np.pi, npts)
+        x = self.c[0] + self.r1 * np.cos(theta)
+        y = self.c[1] + self.r1 * np.sin(theta)
+        z = self.c[2] + np.zeros_like(x)
+
+        # Calculate the radius of the top of the frustum based on the opening angle
+        r2 = self.r1 + self.h * np.tan(self.a)
+
+        # Create the top of the frustum
+        x2 = self.c[0] + r2 * np.cos(theta)
+        y2 = self.c[1] + r2 * np.sin(theta)
+        z2 = self.c[2] + self.h * np.ones_like(x2)
+
+        # Combine the coordinates
+        x = np.append(x, x2)
+        y = np.append(y, y2)
+        z = np.append(z, z2)
+
+        # Reshape the arrays into 2D arrays for plot_surface
+        x = x.reshape((2, npts))
+        y = y.reshape((2, npts))
+        z = z.reshape((2, npts))
+
+        ax.plot_surface(x, y, z, color = 'b')
+    # ==========================================================================
+
 
 
 
@@ -80,3 +112,8 @@ if __name__ == "__main__":
     h = 2.3
 
     frustum = Frustum(r1 = r1, c = cf, h = h, a = alpha)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection = "3d")
+    frustum.plot_frustum(ax = ax)
+    plt.show()
