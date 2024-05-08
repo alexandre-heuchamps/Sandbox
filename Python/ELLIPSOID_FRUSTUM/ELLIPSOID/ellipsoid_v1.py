@@ -1,4 +1,5 @@
 import numpy as np
+import scipy as sp
 
 class Ellipsoid:
     """ A class to represent an ellipsoid """
@@ -60,6 +61,14 @@ class Ellipsoid:
         return result == 1
     # ==========================================================================
 
+    # # ==========================================================================
+    # def rotate(self, theta, phi):
+    #     # Create a rotation matrix from the angles
+    #     r = sp.spatial.transform.Rotation.from_euler('ZYX', [theta, 0, phi])
+    #     # Apply the rotation matrix to U
+    #     self._U = r.apply(self._U)
+    # # ==========================================================================
+
 
 
 
@@ -70,3 +79,6 @@ if __name__ == "__main__":
     lz = .84
     U = np.eye(3)
     ellipsoid = Ellipsoid(c = c, lx = lx, ly = ly, lz = lz, U = U)
+
+    # # Rotate the ellipsoid
+    # ellipsoid.rotate(theta, phi)
