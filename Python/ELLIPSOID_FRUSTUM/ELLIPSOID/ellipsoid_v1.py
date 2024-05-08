@@ -43,3 +43,30 @@ class Ellipsoid:
     def U(self, U: list[float]) -> None:
         self._U = np.array(U)
     # ==========================================================================
+
+    # ==========================================================================
+    def is_inside(self, x: list[float]):
+        x = np.array(x)
+        diff = x - self.c
+        result = diff.T @ self.U @ self.Sigma @ self.U.T @ diff
+        return result <= 1
+    # ==========================================================================
+
+    # ==========================================================================
+    def is_on(self, x: list[float]):
+        x = np.array(x)
+        diff = x - self.c
+        result = diff.T @ self.U @ self.Sigma @ self.U.T @ diff
+        return result == 1
+    # ==========================================================================
+
+
+
+
+if __name__ == "__main__":
+    c = [0.0, 0.0, 0.0]
+    lx = 2.3
+    ly = 1.5
+    lz = .84
+    U = np.eye(3)
+    ellipsoid = Ellipsoid(c = c, lx = lx, ly = ly, lz = lz, U = U)
