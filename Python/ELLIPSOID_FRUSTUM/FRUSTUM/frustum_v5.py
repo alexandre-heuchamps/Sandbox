@@ -12,11 +12,13 @@ class Frustum:
                     c: tuple[float, float, float],
                     h: float,
                     a: float,
+                    v: tuple[float, float, float],
                 ) -> None:
         self._r1: float = r1
         self._c: tuple[float, float, float] = c
         self._h: float = h
         self._a: float = a
+        self._v: tuple[float, float, float] = v
 
     # ==========================================================================
     @property
@@ -56,6 +58,16 @@ class Frustum:
     @a.setter
     def a(self, a: float) -> None:
         self._a = a
+    # ==========================================================================
+
+    # ==========================================================================
+    @property
+    def v(self) -> tuple[float, float, float]:
+        return self._v
+
+    @v.setter
+    def v(self, v: tuple[float, float, float]) -> None:
+        self._v = v
     # ==========================================================================
 
 
