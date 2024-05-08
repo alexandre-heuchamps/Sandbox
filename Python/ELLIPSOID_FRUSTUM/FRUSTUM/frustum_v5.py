@@ -12,7 +12,7 @@ class Frustum:
                     c: tuple[float, float, float],
                     h: float,
                     a: float,
-                    v: tuple[float, float, float],
+                    v: tuple[float, float, float] = (1.0, 1.0, 1.0),
                 ) -> None:
         self._r1: float = r1
         self._c: tuple[float, float, float] = c
@@ -74,4 +74,9 @@ class Frustum:
 
 
 if __name__ == "__main__":
-    pass
+    cf = (0.0, 1.0, 3.5)
+    r1 = .5
+    alpha = np.pi / 18
+    h = 2.3
+
+    frustum = Frustum(r1 = r1, c = cf, h = h, a = alpha)
