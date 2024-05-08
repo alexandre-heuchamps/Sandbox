@@ -178,18 +178,18 @@ class Ellipsoid:
         x, y, z = self.get_mesh()
 
         # Reshape the mesh arrays into 2D arrays
-        x_flat = np.ravel(x)
-        y_flat = np.ravel(y)
-        z_flat = np.ravel(z)
+        x_flat = np.ravel(x) - self.c[0]
+        y_flat = np.ravel(y) - self.c[1]
+        z_flat = np.ravel(z) - self.c[2]
         mesh_flat = np.array([x_flat, y_flat, z_flat])
 
         # Apply the rotation to each point in the mesh
         rotated_mesh_flat = np.dot(self._U, mesh_flat)
 
         # Reshape the rotated mesh arrays back to the original shape
-        x_rot = rotated_mesh_flat[0].reshape(x.shape)
-        y_rot = rotated_mesh_flat[1].reshape(y.shape)
-        z_rot = rotated_mesh_flat[2].reshape(z.shape)
+        x_rot = rotated_mesh_flat[0].reshape(x.shape) + self.c[0]
+        y_rot = rotated_mesh_flat[1].reshape(y.shape) + self.c[1]
+        z_rot = rotated_mesh_flat[2].reshape(z.shape) + self.c[2]
 
         return x_rot, y_rot, z_rot
     # ==========================================================================
