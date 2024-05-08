@@ -5,6 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.animation as animation
 from matplotlib.animation import PillowWriter
 from frustum import Frustum
+from ellipsoid import Ellipsoid
 
 
 
@@ -99,8 +100,8 @@ if __name__ == "__main__":
     ani = animation.FuncAnimation(fig,
                                     animate,
                                     frames = times,
-                                    interval = 750,
+                                    interval = 200,
                                     fargs = (frust, h_interp, kv_norm_interp, ax,),
                                 )
-    ani.save(f"{__file__.split('.')[0]}_anim.gif", writer = PillowWriter(fps = 15))
+    ani.save(f"{__file__.split('.')[0]}_anim.gif", writer = PillowWriter(fps = 10))
     plt.show()
