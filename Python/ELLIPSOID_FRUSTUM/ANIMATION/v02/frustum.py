@@ -168,24 +168,3 @@ class Frustum:
         self.y = self.y.reshape((2, self.npts))
         self.z = self.z.reshape((2, self.npts))
     # ==========================================================================
-
-
-
-
-
-if __name__ == "__main__":
-    cf = (0.0, 1.0, 3.5)
-    r1 = .5
-    alpha = np.pi / 18
-    h = 2.3
-
-    frustum = Frustum(r1 = r1, c = cf, h = h, a = alpha)
-
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection = "3d")
-    ax.plot_surface(frustum.x, frustum.y, frustum.z, color = 'b', alpha = 0.5)
-    frustum.v = (1.0, 1.0, 1.0)
-    frustum.orient_frustum()
-    ax.plot_surface(frustum.x, frustum.y, frustum.z, color = 'r', alpha = 0.5)
-    ax.set_aspect('equal')
-    plt.show()
