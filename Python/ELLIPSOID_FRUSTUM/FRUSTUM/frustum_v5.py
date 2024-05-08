@@ -183,7 +183,7 @@ if __name__ == "__main__":
     fig = plt.figure()
     ax = fig.add_subplot(111, projection = "3d")
     ax.plot_surface(frustum.x, frustum.y, frustum.z, color = 'b', alpha = 0.5)
-    frustum.v = (1.0, 0.0, 0.0)
+    frustum.v = (1.0, 1.0, 1.0)
     frustum.orient_frustum()
     ax.plot_surface(frustum.x, frustum.y, frustum.z, color = 'r', alpha = 0.5)
     ax.set_aspect('equal')
