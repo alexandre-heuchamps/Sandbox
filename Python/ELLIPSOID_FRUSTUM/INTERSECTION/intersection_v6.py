@@ -84,4 +84,6 @@ ax.set_xlabel("X")
 ax.set_ylabel("Y")
 ax.set_zlabel("Z")
 
+plt.savefig("intersection_analytic.svg")
+
 plt.show()
