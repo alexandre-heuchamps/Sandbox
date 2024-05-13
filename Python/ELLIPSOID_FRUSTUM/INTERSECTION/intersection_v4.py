@@ -72,17 +72,17 @@ if __name__ == "__main__":
     Theta, Phi = np.meshgrid(theta, phi)
 
     # Ellipsoid
-    ce = [0.0, 0.0, 500.0]
+    ce = [0.0, 0.0, 5.0]
     l = [2.0, 1.25, 0.5]
     Xe, Ye, Ze = get_ellispoid(ce, l, Theta, Phi)
 
     # Conical frustum
     cf = [0.0, 0.0, 0.0]
     h = np.linalg.norm(np.array(cf) - np.array(ce))
-    r1 = 1e-3
+    r1 = .5
     nz = 200
     z = np.linspace(cf[-1], h, nz)
-    alpha = 5e-4
+    alpha = np.pi / 45
     Xf, Yf, Zf = get_con_frust(cf, theta, r1, alpha, z)
 
     Xe_flat, Ye_flat, Ze_flat = np.ravel(Xe), np.ravel(Ye), np.ravel(Ze)
