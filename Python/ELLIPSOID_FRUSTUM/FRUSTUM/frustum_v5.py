@@ -117,9 +117,9 @@ class Frustum:
     def create_frustum(self) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         # Create the base of the frustum
         theta = np.linspace(0.0, 2.0 * np.pi, self.npts)
-        x = self.c[0] + self.r1 * np.cos(theta)
-        y = self.c[1] + self.r1 * np.sin(theta)
-        z = self.c[2] + np.zeros_like(x)
+        self.x = self.c[0] + self.r1 * np.cos(theta)
+        self.y = self.c[1] + self.r1 * np.sin(theta)
+        self.z = self.c[2] + np.zeros_like(self.x)
 
         # Calculate the radius of the top of the frustum based on the opening angle
         r2 = self.r1 + self.h * np.tan(self.a)
@@ -130,16 +130,16 @@ class Frustum:
         z2 = self.c[2] + h * np.ones_like(x2)
 
         # Combine the coordinates
-        x = np.append(x, x2)
-        y = np.append(y, y2)
-        z = np.append(z, z2)
+        self.x = np.append(self.x, x2)
+        self.y = np.append(self.y, y2)
+        self.z = np.append(self.z, z2)
 
         # Reshape the arrays into 2D arrays for plot_surface
-        x = x.reshape((2, self.npts))
-        y = y.reshape((2, self.npts))
-        z = z.reshape((2, self.npts))
+        self.x = self.x.reshape((2, self.npts))
+        self.y = self.y.reshape((2, self.npts))
+        self.z = self.z.reshape((2, self.npts))
 
-        return x, y, z
+        return self.x, self.y, self.z
     # ==========================================================================
 
     # ==========================================================================
